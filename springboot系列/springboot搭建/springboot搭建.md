@@ -2,7 +2,7 @@
 
 ###1.选择spring initializr
 
-![1532967570728](D:\笔记\markdown\springboot系列\springboot搭建.assets\1532967570728.png)
+![1532967570728](.\springboot搭建.assets\1532967570728.png)
 
 next
 
