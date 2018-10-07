@@ -2,13 +2,13 @@
 
 ###1.选择spring initializr
 
-![1532967570728](.\springboot搭建.assets\1532967570728.png)
+![1532967570728](./picFolder/1532967570728.png)
 
 next
 
 #### 2.设置参数
 
-![1532967772110](D:\笔记\markdown\springboot系列\springboot搭建.assets\1532967772110.png)
+![1532967772110](./picFolder/1532967772110.png)
 
 next
 
@@ -16,13 +16,13 @@ next
 
 &emsp;&emsp;在这里选择spring boot版本和web依赖（忽略sql的依赖，如有需要[点击这里](f),单独将mybatis的整合)，后面也可手动编辑pom文件修改增加删除依赖
 
-![1532967938985](D:\笔记\markdown\springboot系列\springboot搭建.assets\1532967938985.png)
+![1532967938985](./picFolder/1532967938985.png)
 
 这里我们选择web搭建一个简单的REST风格demo。然后next。
 
 ####4.设置项目存放地址
 
-![1532968024509](D:\笔记\markdown\springboot系列\springboot搭建.assets\1532968024509.png)
+![1532968024509](./picFolder/1532968024509.png)
 
 这样就成功构建了一个springboot项目。
 
@@ -30,7 +30,7 @@ next
 
 &emsp;&emsp;现在新建一个controller包，包下新建一个HelloController,创建之后项目目录结构如下：
 
-![1532969025023](D:\笔记\markdown\springboot系列\springboot搭建.assets\1532969025023.png)
+![1532969025023](./picFolder/1532969025023.png)
 
 HelloController代码如下：
 

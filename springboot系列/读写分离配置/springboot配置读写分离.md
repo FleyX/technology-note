@@ -33,7 +33,7 @@
 
   然后重启数据库，使用`show master status;`语句查看主库状态，如下所示：
 
-![主库状态](.\读写分离配置\pic1.png)
+![主库状态](./picFolder/pic1.png)
 
 - 从库配置
 
@@ -59,7 +59,7 @@
 
   接着运行`start slave;`开启备份,正常情况如下图所示：Slave_IO_Running和Slave_SQL_Running都为yes。
 
-  ![1536223020742](.\读写分离配置\pic2.png)
+  ![1536223020742](./picFolder/pic2.png)
 
   可以用这个步骤开启多个从库。
 
@@ -306,6 +306,6 @@ public class ReadOnlyInterceptor implements Ordered {
 
 &emsp;&emsp;编写好代码来试试结果如何，下面是运行截图：
 
-![1536312274474](.\读写分离配置\pic3.png)
+![1536312274474](./picFolder/pic3.png)
 
 &emsp;&emsp;断断续续写了好几天终于是写完了，，，如果有帮助到你，，欢迎star哦，，这里是完整代码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/dxfl)
