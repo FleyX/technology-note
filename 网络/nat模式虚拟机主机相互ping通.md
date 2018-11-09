@@ -1,3 +1,4 @@
+[id]: 92887a10d6c111e8aa858b6a40460626
 ## 1、wmware设置
 
 &emsp;&emsp;这篇记录下nat网络模式下虚拟机与主机的相互ping通。首先使用wmware建立一个ubuntu虚拟机，网络模式选择nat模式。然后点击虚拟网络编辑：

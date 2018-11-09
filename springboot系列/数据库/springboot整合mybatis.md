@@ -1,3 +1,4 @@
+[id]: 818f3b40d6c111e8aa858b6a40460626
 ## 写在前面
 
 ​	刚毕业的第一份工作是java开发，项目中需要用到mybatis，特此记录学习过程，这只是一个简单demo，mybatis用法很多不可能全部写出来，有更复杂的需求建议查看mybatis的官方中文文档，[点击跳转](http://www.mybatis.org/mybatis-3/zh/index.html)。下面时项目环境/版本。

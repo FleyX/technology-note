@@ -1,3 +1,4 @@
+[id]: 82f50cd0d6c111e8aa858b6a40460626
 # <div align="center">springboot与activeMQ入门（1）</div>
 **说明：acitveMQ版本为：5.9.1，springboot版本为2.0.3**<br/>
 ## 一. 下载安装（windows）
