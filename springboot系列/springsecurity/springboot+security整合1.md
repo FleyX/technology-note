@@ -1,4 +1,7 @@
-[id]: 7a77bda0d6c111e8aa858b6a40460626
+[id]:2018-08-20
+[type]:javaee
+[tag]:java,spring,springsecurity,scurity
+
 **说明springboot版本2.0.3**
 
 ##一、 介绍

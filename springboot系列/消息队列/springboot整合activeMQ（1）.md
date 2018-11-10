@@ -1,5 +1,8 @@
-[id]: 82f50cd0d6c111e8aa858b6a40460626
-# <div align="center">springboot与activeMQ入门（1）</div>
+[id]:2018-09-05
+[type]:javaee
+[tag]:java,spring,springboot,activemq
+
+
 **说明：acitveMQ版本为：5.9.1，springboot版本为2.0.3**<br/>
 ## 一. 下载安装（windows）
 &emsp;&emsp;官方下载地址:[点我跳转](http://activemq.apache.org/download-archives.html),选择windows安装包下载,然后解压，解压后运行bin目录下的**activemq.bat**启动服务,无报错即可启动成功。默认管理地址为：[localhost:8161/admin](localhost:8161/admin),默认管理员账号密码为**admin**/**admin**。

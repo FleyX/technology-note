@@ -1,4 +1,7 @@
-[id]: 8940d600d6c111e8aa858b6a40460626
+[id]:2018-09-22
+[type]:java
+[tag]:java,reflect,excel,hssfworksheet
+
 ## 一、背景
 
 &emsp;&emsp;最近在java上做了一个EXCEL的导出功能，写了一个通用类，在这里分享分享，该类支持多sheet，且无需手动进行复杂的类型转换，只需提供三个参数即可：

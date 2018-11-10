@@ -1,4 +1,7 @@
-[id]: 7cfc1e90d6c111e8aa858b6a40460626
+[id]:2018-08-22
+[type]:javaee
+[tag]:java,spring,springsecurity,scurity
+
 &emsp;&emsp;这篇讲解如何自定义鉴权过程，实现根据数据库查询出的url和method是否匹配当前请求的url和method来决定有没有权限。security鉴权过程如下：
 ![鉴权流程](./picFolder/pic2.png)
 
