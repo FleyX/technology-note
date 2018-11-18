@@ -1,3 +1,11 @@
+---
+date="2018-11-09T00:00:00+08:00"
+title="linux下mongodb的安装与配置（非atp）"
+headWord="记录，linux下mongodb的安装与配置免得忘了"
+tags=["linux","mongodb"]
+category="linux"
+serie="软件安装"
+---
 [id]: 2018-11-09
 [type]: 软件
 [tag]: linux,mongodb
