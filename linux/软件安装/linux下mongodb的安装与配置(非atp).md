@@ -1,9 +1,9 @@
 ---
-date="2018-11-20T10:38:05+08:00",
-title="linux下mongodb的配置与安装",
-headWord="记录linux下如何安装与配置mongodb",
-tags=["mongodb", "linux"],
-category="linux",
+id="2018-11-20-10-38-05"
+title="linux下mongodb的配置与安装"
+headWord="记录linux下如何安装与配置mongodb"
+tags=["mongodb", "linux"]
+category="linux"
 serie="linux软件安装配置"
 ---
 
