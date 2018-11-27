@@ -1,0 +1,50 @@
+---
+id="2018-11-20-10-38-05"
+title="linux下mongodb的配置与安装"
+headWord="linux下docker的安装与配置"
+tags=["docker", "linux","ubuntu"]
+category="linux"
+serie="linux软件安装配置"
+---
+
+# 一、安装
+
+&emsp;&emsp;有两种安装方法，脚本安装和apt安装
+
+## 1、脚本安装
+
+&emsp;&emsp;root下执行以下命令(非root下会要求输入密码）：
+```bash
+wget -qO- https://get.docker.com/ | sh
+```
+等待执行完毕后会有如下提示：
+```
+    If you would like to use Docker as a non-root user, you should now consider
+    adding your user to the "docker" group with something like:
+
+    sudo usermod -aG docker 用户名
+   Remember that you will have to log out and back in for this to take effect! 
+```
+就是如果要以非root用户直接运行docker时需要执行`sudo usermod -aG docker 非root用户名`,然后重新登陆即可。
+
+## 2、apt安装
+&emsp;&emsp;直接运行(root下)
+```bash
+apt-get update
+apt-get install docker.io
+```
+
+# 二、配置国内源
+
+&emsp;&emsp;国外源太慢配置为国内源。修改或创建`/etc/docker/daemon.json`,内容如下：
+```json
+{
+    "registry-mirrors": [
+        "加速地址"
+    ],
+    "insecure-registries": []
+}
+```
+以下是国内加速地址：
+- 网易  [http://hub-mirror.c.163.com](http://hub-mirror.c.163.com)
+- ustc [https://docker.mirrors.ustc.edu.cn](https://docker.mirrors.ustc.edu.cn)
