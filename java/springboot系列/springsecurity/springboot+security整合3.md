@@ -1,13 +1,19 @@
-[id]:2018-08-22
-[type]:javaee
-[tag]:java,spring,springsecurity,scurity
+---
+id="2018-08-22-10-38"
+title="springboot+security整合（3）"
+headWord="文接上篇，上篇说了那个啥自定义校验的功能，这篇来学学如何自定义鉴权。感觉都定义到这个地步，都不太需要security框架了，再自己整整缓存方面的功能就是一个功能完成的鉴权模块了。"
+tags=["java", "spring","springboot","spring-security","security"]
+category="java"
+serie="spring boot学习"
+---
 
-&emsp;&emsp;这篇讲解如何自定义鉴权过程，实现根据数据库查询出的url和method是否匹配当前请求的url和method来决定有没有权限。security鉴权过程如下：
+&emsp;&emsp;这篇讲解如何自定义鉴权过程，实现根据数据库查询出的 url 和 method 是否匹配当前请求的 url 和 method 来决定有没有权限。security 鉴权过程如下：
 ![鉴权流程](./picFolder/pic2.png)
 
-##一、 重写metadataSource类
+## 一、 重写 metadataSource 类
 
-1. 编写MyGranteAuthority类，让权限包含url和method两个部分。
+1. 编写 MyGranteAuthority 类，让权限包含 url 和 method 两个部分。
+
 ```java
 public class MyGrantedAuthority implements GrantedAuthority {
     private String method;
@@ -42,7 +48,9 @@ public class MyGrantedAuthority implements GrantedAuthority {
     }
 }
 ```
-2. 编写MyConfigAttribute类，实现ConfigAttribute接口，代码如下：
+
+2. 编写 MyConfigAttribute 类，实现 ConfigAttribute 接口，代码如下：
+
 ```java
 public class MyConfigAttribute implements ConfigAttribute {
     private HttpServletRequest httpServletRequest;
@@ -71,7 +79,9 @@ public class MyConfigAttribute implements ConfigAttribute {
     }
 }
 ```
-3. 编写MySecurityMetadataSource类，获取当前url所需要的权限
+
+3. 编写 MySecurityMetadataSource 类，获取当前 url 所需要的权限
+
 ```java
 @Component
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
@@ -96,7 +106,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         for (Jurisdiction jurisdiction : jurisdictions) {
             //使用AntPathRequestMatcher比较可让url支持ant风格,例如/user/*/a
             //*匹配一个或多个字符，**匹配任意字符或目录
-            matcher = new AntPathRequestMatcher(jurisdiction.getUrl(), jurisdiction.getMethod()); 
+            matcher = new AntPathRequestMatcher(jurisdiction.getUrl(), jurisdiction.getMethod());
             if (matcher.matches(request)) {
                 ConfigAttribute configAttribute = new MyConfigAttribute(request,new MyGrantedAuthority(jurisdiction.getMethod(),jurisdiction.getUrl()));
                 allConfigAttribute.add(configAttribute);
@@ -120,9 +130,10 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 }
 ```
 
-##二、 编写MyAccessDecisionManager类
+## 二、 编写 MyAccessDecisionManager 类
 
-&emsp;&emsp;实现AccessDecisionManager接口以实现权限判断,直接return说明验证通过，如不通过需要抛出对应错误，代码如下：
+&emsp;&emsp;实现 AccessDecisionManager 接口以实现权限判断,直接 return 说明验证通过，如不通过需要抛出对应错误，代码如下：
+
 ```java
 @Component
 public class MyAccessDecisionManager implements AccessDecisionManager{
@@ -161,8 +172,9 @@ public class MyAccessDecisionManager implements AccessDecisionManager{
 }
 ```
 
-##三、 编写MyFilterSecurityInterceptor类
-&emsp;&emsp;该类继承AbstractSecurityInterceptor类，实现Filter接口,代码如下：
+## 三、 编写 MyFilterSecurityInterceptor 类
+&emsp;&emsp;该类继承 AbstractSecurityInterceptor 类，实现 Filter 接口,代码如下：
+
 ```java
 @Component
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
@@ -213,8 +225,10 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 }
 ```
 
-## 四、 加入到security的过滤器链中
+## 四、 加入到 security 的过滤器链中
+
 ```java
 .addFilterBefore(urlFilterSecurityInterceptor,FilterSecurityInterceptor.class)
 ```
+
 完成

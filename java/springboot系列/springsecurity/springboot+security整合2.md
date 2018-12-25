@@ -1,3 +1,11 @@
+---
+id="2018-08-21-10-38"
+title="springboot+security整合（2）"
+headWord="文接上篇，上一篇中登录验证都由security帮助我们完成了，如果我们想要增加一个验证码登录或者其它的自定义校验就没办法了，因此这一篇讲解如何实现这个功能。"
+tags=["java", "spring","springboot","spring-security","security"]
+category="java"
+serie="spring boot学习"
+---
 [id]:2018-08-21
 [type]:javaee
 [tag]:java,spring,springsecurity,scurity

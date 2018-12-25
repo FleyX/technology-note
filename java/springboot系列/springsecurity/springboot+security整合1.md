@@ -1,16 +1,22 @@
-[id]:2018-08-20
-[type]:javaee
-[tag]:java,spring,springsecurity,scurity
+---
+id="2018-08-20-10-38"
+title="springboot+security整合（1）"
+headWord="javaee中的非常重要的一个安全认证框架，但是略微重量级，但是既然领导交代要学，那就学吧。。。"
+tags=["java", "spring","springboot","spring-security","security"]
+category="java"
+serie="spring boot学习"
+---
 
-**说明springboot版本2.0.3**
+**说明 springboot 版本 2.0.3<br/>项目地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**
 
-##一、 介绍
+## 一、 介绍
 
-&emsp;&emsp;Spring Security是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架。它提供了一组可以在Spring应用上下文中配置的Bean，充分利用了Spring IoC，DI（控制反转Inversion of Control ,DI:Dependency Injection 依赖注入）和AOP（面向切面编程）功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作。
+&emsp;&emsp;Spring Security 是一个能够为基于 Spring 的企业应用系统提供声明式的安全访问控制解决方案的安全框架。它提供了一组可以在 Spring 应用上下文中配置的 Bean，充分利用了 Spring IoC，DI（控制反转 Inversion of Control ,DI:Dependency Injection 依赖注入）和 AOP（面向切面编程）功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作。
 
-##二、 环境搭建
+## 二、 环境搭建
 
-&emsp;&emsp;建立springboot2项目,加入security依赖,mybatis依赖
+&emsp;&emsp;建立 springboot2 项目,加入 security 依赖,mybatis 依赖
+
 ```xml
 <dependency>
    <groupId>org.springframework.boot</groupId>
@@ -27,7 +33,9 @@
     <scope>runtime</scope>
 </dependency>
 ```
- 数据库为传统的用户--角色--权限，权限表记录了url和method，springboot配置文件如下：
+
+数据库为传统的用户--角色--权限，权限表记录了 url 和 method，springboot 配置文件如下：
+
 ```yml
 mybatis:
   type-aliases-package: com.example.demo.entity
@@ -44,7 +52,9 @@ spring:
       charset: utf-8
       enabled: true
 ```
-springboot启动类中加入如下代码,设置路由匹配规则。
+
+springboot 启动类中加入如下代码,设置路由匹配规则。
+
 ```java
 @Override
 protected void configurePathMatch(PathMatchConfigurer configurer) {
@@ -53,28 +63,32 @@ protected void configurePathMatch(PathMatchConfigurer configurer) {
 }
 ```
 
-## 三、 security配置
+## 三、 security 配置
 
-&emsp;&emsp;默认情况下security是无需任何自定义配置就可使用的，我们不考虑这种方式，直接讲如何个性化登录过程。
+&emsp;&emsp;默认情况下 security 是无需任何自定义配置就可使用的，我们不考虑这种方式，直接讲如何个性化登录过程。
 
-#### 1、 建立security配置文件,目前配置文件中还没有任何配置。
+#### 1、 建立 security 配置文件,目前配置文件中还没有任何配置。
+
 ```java
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-#### 2、 个性化登录，security中的登录如下：
+#### 2、 个性化登录，security 中的登录如下：
+
 ![登录过程](./picFolder/pic1.png)
-- security需要一个user的实体类实现`UserDetails`接口,该实体类最后与系统中用户的实体类分开，代码如下：
+
+- security 需要一个 user 的实体类实现`UserDetails`接口,该实体类最后与系统中用户的实体类分开，代码如下：
+
 ```java
 public class SecurityUser implements UserDetails{
 	private static final long serialVersionUID = 1L;
 	private String password;
 	private String name;
 	List<GrantedAuthority> authorities;
-	
-	public User(string name,string password) {
+
+	public SecurityUser(string name,string password) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -125,7 +139,9 @@ public class SecurityUser implements UserDetails{
 	}
 }
 ```
-- 编写了实体类还需要编写一个服务类SecurityService实现`UserDetailsService`接口，重写loadByUsername方法，通过这个方法根据用户名获取用户信息，代码如下：
+
+- 编写了实体类还需要编写一个服务类 SecurityService 实现`UserDetailsService`接口，重写 loadByUsername 方法，通过这个方法根据用户名获取用户信息，代码如下：
+
 ```java
 @Component
 public class SecurityUserService implements UserDetailsService {
@@ -158,7 +174,9 @@ public class SecurityUserService implements UserDetailsService {
 	}
 }
 ```
-- 通常我们会对密码进行加密，所有还要编写一个passwordencode类，实现PasswordEncoder接口，代码如下：
+
+- 通常我们会对密码进行加密，所有还要编写一个 passwordencode 类，实现 PasswordEncoder 接口，代码如下：
+
 ```java
 @Component
 public class MyPasswordEncoder implements PasswordEncoder {
@@ -178,7 +196,9 @@ public class MyPasswordEncoder implements PasswordEncoder {
 ```
 
 #### 3、 编辑配置文件
-- 编写config Bean以使用上面定义的验证逻辑,securityUserService、myPasswordEncoder通过@Autowired引入。
+
+- 编写 config Bean 以使用上面定义的验证逻辑,securityUserService、myPasswordEncoder 通过@Autowired 引入。
+
 ```java
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -186,7 +206,9 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         .passwordEncoder(myPasswordEncoder);
 }
 ```
-- 然后编写configure Bean（和上一个不一样，参数不同），实现security验证逻辑,代码如下：
+
+- 然后编写 configure Bean（和上一个不一样，参数不同），实现 security 验证逻辑,代码如下：
+
 ```java
 @Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -214,13 +236,15 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             .logoutSuccessUrl("public/logoutSuccess")
 	}
 ```
-到这里便可实现security与springboot的基本整合。
+
+到这里便可实现 security 与 springboot 的基本整合。
 
 ## 四、实现记住我功能
 
 #### 1、 建表
 
-&emsp;&emsp;记住我功能需要数据库配合实现，首先要在数据库建一张表用户保存cookie和用户名，数据库建表语句如下：不能做修改
+&emsp;&emsp;记住我功能需要数据库配合实现，首先要在数据库建一张表用户保存 cookie 和用户名，数据库建表语句如下：不能做修改
+
 ```sql
 CREATE TABLE `persistent_logins` (
   `username` varchar(64) NOT NULL,
@@ -231,8 +255,10 @@ CREATE TABLE `persistent_logins` (
 )
 ```
 
-#### 2、 编写rememberMeservice Bean
+#### 2、 编写 rememberMeservice Bean
+
 &emsp;&emsp;代码如下：
+
 ```java
 	@Bean
     public RememberMeServices rememberMeServices(){
@@ -245,13 +271,17 @@ CREATE TABLE `persistent_logins` (
         return rememberMeServices;
     }
 ```
-dataSource为@Autowired引入
 
-#### 3、 配置文件设置remember
-&emsp;&emsp;在config(HttpSecurity http)中加入记住我功能
-```java 
+dataSource 为@Autowired 引入
+
+#### 3、 配置文件设置 remember
+
+&emsp;&emsp;在 config(HttpSecurity http)中加入记住我功能
+
+```java
 .rememberMe()
     .rememberMeServices(rememberMeServices())
     .key("INTERNAL_SECRET_KEY")
 ```
-在登录表单中设置remember-me即可实现记住我功能。
+
+在登录表单中设置 remember-me 即可实现记住我功能。

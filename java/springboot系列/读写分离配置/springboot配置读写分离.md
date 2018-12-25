@@ -1,6 +1,11 @@
-[id]:2018-09-10
-[type]:javaee
-[tag]:java,spring,springboot,mybatis,读写分离
+---
+id="2018-09-10-10-38"
+title="springboot配置读写分离(Mybatis)"
+headWord="近日工作任务较轻，有空学习学习技术，遂来研究如果实现读写分离。这里用博客记录下过程，一方面可备日后查看，同时也能分享给大家（网上的资料真的大都是抄来抄去，，还不带格式的，看的真心难受）。"
+tags=["java", "spring","springboot","mysql","主从备份","读写分离"]
+category="java"
+serie="spring boot学习"
+---
 
 &emsp;&emsp;近日工作任务较轻，有空学习学习技术，遂来研究如果实现读写分离。这里用博客记录下过程，一方面可备日后查看，同时也能分享给大家（网上的资料真的大都是抄来抄去，，还不带格式的，看的真心难受）。
 
@@ -10,23 +15,23 @@
 
 &emsp;&emsp;一个项目中数据库最基础同时也是最主流的是单机数据库，读写都在一个库中。当用户逐渐增多，单机数据库无法满足性能要求时，就会进行读写分离改造（适用于读多写少），写操作一个库，读操作多个库，通常会做一个数据库集群，开启主从备份，一主多从，以提高读取性能。当用户更多读写分离也无法满足时，就需要分布式数据库了（可能以后会学习怎么弄）。
 
-&emsp;&emsp;正常情况下读写分离的实现，首先要做一个一主多从的数据库集群，同时还需要进行数据同步。这一篇记录如何用mysql搭建一个一主多次的配置，下一篇记录代码层面如何实现读写分离。
+&emsp;&emsp;正常情况下读写分离的实现，首先要做一个一主多从的数据库集群，同时还需要进行数据同步。这一篇记录如何用 mysql 搭建一个一主多次的配置，下一篇记录代码层面如何实现读写分离。
 
 ## 2、搭建一主多从数据库集群
 
-&emsp;&emsp;主从备份需要多台虚拟机，我是用wmware完整克隆多个实例，注意直接克隆的虚拟机会导致每个数据库的uuid相同，需要修改为不同的uuid。修改方法参考这个：[点击跳转](https://blog.csdn.net/pratise/article/details/80413198)。
+&emsp;&emsp;主从备份需要多台虚拟机，我是用 wmware 完整克隆多个实例，注意直接克隆的虚拟机会导致每个数据库的 uuid 相同，需要修改为不同的 uuid。修改方法参考这个：[点击跳转](https://blog.csdn.net/pratise/article/details/80413198)。
 
 - 主库配置
 
-  主数据库（master）中新建一个用户用于从数据库（slave）读取主数据库二进制日志，sql语句如下：
+  主数据库（master）中新建一个用户用于从数据库（slave）读取主数据库二进制日志，sql 语句如下：
 
-    ```sql
-    mysql> CREATE USER 'repl'@'%' IDENTIFIED BY '123456';#创建用户
-    mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';#分配权限
-    mysql>flush privileges;   #刷新权限
-    ```
+  ```sql
+  mysql> CREATE USER 'repl'@'%' IDENTIFIED BY '123456';#创建用户
+  mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';#分配权限
+  mysql>flush privileges;   #刷新权限
+  ```
 
-  同时修改mysql配置文件开启二进制日志，新增部分如下：
+  同时修改 mysql 配置文件开启二进制日志，新增部分如下：
 
   ```sql
   [mysqld]
@@ -61,7 +66,7 @@
            MASTER_LOG_POS=154;
   ```
 
-  接着运行`start slave;`开启备份,正常情况如下图所示：Slave_IO_Running和Slave_SQL_Running都为yes。
+  接着运行`start slave;`开启备份,正常情况如下图所示：Slave_IO_Running 和 Slave_SQL_Running 都为 yes。
 
   ![1536223020742](./picFolder/pic2.png)
 
@@ -70,32 +75,32 @@
 &emsp;&emsp;默认情况下备份是主库的全部操作都会备份到从库，实际可能需要忽略某些库，可以在主库中增加如下配置：
 
 ```sql
-# 不同步哪些数据库  
-binlog-ignore-db = mysql  
-binlog-ignore-db = test  
-binlog-ignore-db = information_schema  
-  
-# 只同步哪些数据库，除此之外，其他不同步  
-binlog-do-db = game  
+# 不同步哪些数据库
+binlog-ignore-db = mysql
+binlog-ignore-db = test
+binlog-ignore-db = information_schema
+
+# 只同步哪些数据库，除此之外，其他不同步
+binlog-do-db = game
 ```
 
 ## 3、代码层面进行读写分离
 
-&emsp;&emsp;代码环境是springboot+mybatis+druib连接池。想要读写分离就需要配置多个数据源，在进行写操作是选择写的数据源，读操作时选择读的数据源。其中有两个关键点：
+&emsp;&emsp;代码环境是 springboot+mybatis+druib 连接池。想要读写分离就需要配置多个数据源，在进行写操作是选择写的数据源，读操作时选择读的数据源。其中有两个关键点：
 
 - 如何切换数据源
 - 如何根据不同的方法选择正确的数据源
 
 ### 1)、如何切换数据源
 
-&emsp;&emsp;通常用springboot时都是使用它的默认配置，只需要在配置文件中定义好连接属性就行了，但是现在我们需要自己来配置了，spring是支持多数据源的，多个datasource放在一个HashMap`TargetDataSource`中，通过`dertermineCurrentLookupKey`获取key来觉定要使用哪个数据源。因此我们的目标就很明确了，建立多个datasource放到TargetDataSource中，同时重写dertermineCurrentLookupKey方法来决定使用哪个key。
+&emsp;&emsp;通常用 springboot 时都是使用它的默认配置，只需要在配置文件中定义好连接属性就行了，但是现在我们需要自己来配置了，spring 是支持多数据源的，多个 datasource 放在一个 HashMap`TargetDataSource`中，通过`dertermineCurrentLookupKey`获取 key 来觉定要使用哪个数据源。因此我们的目标就很明确了，建立多个 datasource 放到 TargetDataSource 中，同时重写 dertermineCurrentLookupKey 方法来决定使用哪个 key。
 
 ### 2)、如何选择数据源
 
-&emsp;&emsp;事务一般是注解在Service层的，因此在开始这个service方法调用时要确定数据源，有什么通用方法能够在开始执行一个方法前做操作呢？相信你已经想到了那就是**切面 **。怎么切有两种办法：
+&emsp;&emsp;事务一般是注解在 Service 层的，因此在开始这个 service 方法调用时要确定数据源，有什么通用方法能够在开始执行一个方法前做操作呢？相信你已经想到了那就是**切面 **。怎么切有两种办法：
 
 - 注解式，定义一个只读注解，被该数据标注的方法使用读库
-- 方法名，根据方法名写切点，比如getXXX用读库，setXXX用写库
+- 方法名，根据方法名写切点，比如 getXXX 用读库，setXXX 用写库
 
 ### 3)、代码编写
 
@@ -123,9 +128,9 @@ mysql:
       driver-class-name: com.mysql.jdbc.Driver
 ```
 
-#### b、编写DbContextHolder类
+#### b、编写 DbContextHolder 类
 
-&emsp;&emsp;这个类用来设置数据库类别，其中有一个ThreadLocal用来保存每个线程的是使用读库，还是写库。代码如下：
+&emsp;&emsp;这个类用来设置数据库类别，其中有一个 ThreadLocal 用来保存每个线程的是使用读库，还是写库。代码如下：
 
 ```java
 /**
@@ -162,9 +167,9 @@ public class DbContextHolder {
 }
 ```
 
-#### c、重写determineCurrentLookupKey方法
+#### c、重写 determineCurrentLookupKey 方法
 
-&emsp;&emsp;spring在开始进行数据库操作时会通过这个方法来决定使用哪个数据库，因此我们在这里调用上面DbContextHolder类的`getDbType()`方法获取当前操作类别,同时可进行读库的负载均衡，代码如下：
+&emsp;&emsp;spring 在开始进行数据库操作时会通过这个方法来决定使用哪个数据库，因此我们在这里调用上面 DbContextHolder 类的`getDbType()`方法获取当前操作类别,同时可进行读库的负载均衡，代码如下：
 
 ```java
 public class MyAbstractRoutingDataSource extends AbstractRoutingDataSource {
@@ -191,7 +196,7 @@ public class MyAbstractRoutingDataSource extends AbstractRoutingDataSource {
 
 #### d、编写配置类
 
-&emsp;&emsp;由于要进行读写分离，不能再用springboot的默认配置，我们需要手动来进行配置。首先生成数据源，使用@ConfigurProperties自动生成数据源：
+&emsp;&emsp;由于要进行读写分离，不能再用 springboot 的默认配置，我们需要手动来进行配置。首先生成数据源，使用@ConfigurProperties 自动生成数据源：
 
 ```java
 	/**
@@ -208,9 +213,9 @@ public class MyAbstractRoutingDataSource extends AbstractRoutingDataSource {
     }
 ```
 
-读数据源类似，注意有多少个读库就要设置多少个读数据源，Bean名为read+序号。
+读数据源类似，注意有多少个读库就要设置多少个读数据源，Bean 名为 read+序号。
 
-&emsp;&emsp;然后设置数据源，使用的是我们之前写的MyAbstractRoutingDataSource类
+&emsp;&emsp;然后设置数据源，使用的是我们之前写的 MyAbstractRoutingDataSource 类
 
 ```java
 	/**
@@ -228,7 +233,7 @@ public class MyAbstractRoutingDataSource extends AbstractRoutingDataSource {
     }
 ```
 
-&emsp;&emsp;接着需要设置sqlSessionFactory
+&emsp;&emsp;接着需要设置 sqlSessionFactory
 
 ```java
 	/**
@@ -266,7 +271,7 @@ public class MyAbstractRoutingDataSource extends AbstractRoutingDataSource {
 
 #### a、注解式
 
-&emsp;&emsp;首先定义一个只读注解，被这个注解方法使用读库，其他使用写库，如果项目是中途改造成读写分离可使用这个方法，无需修改业务代码，只要在只读的service方法上加一个注解即可。
+&emsp;&emsp;首先定义一个只读注解，被这个注解方法使用读库，其他使用写库，如果项目是中途改造成读写分离可使用这个方法，无需修改业务代码，只要在只读的 service 方法上加一个注解即可。
 
 ```java
 @Target({ElementType.METHOD,ElementType.TYPE})
@@ -275,7 +280,7 @@ public @interface ReadOnly {
 }
 ```
 
-&emsp;&emsp;然后写一个切面来切换数据使用哪种数据源，重写getOrder保证本切面优先级高于事务切面优先级，在启动类加上`@EnableTransactionManagement(order = 10) `,为了代码如下：
+&emsp;&emsp;然后写一个切面来切换数据使用哪种数据源，重写 getOrder 保证本切面优先级高于事务切面优先级，在启动类加上`@EnableTransactionManagement(order = 10)`,为了代码如下：
 
 ```java
 @Aspect
@@ -312,4 +317,4 @@ public class ReadOnlyInterceptor implements Ordered {
 
 ![1536312274474](./picFolder/pic3.png)
 
-&emsp;&emsp;断断续续写了好几天终于是写完了，，，如果有帮助到你，，欢迎star哦，，这里是完整代码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/dxfl)
+&emsp;&emsp;断断续续写了好几天终于是写完了，，，如果有帮助到你，，欢迎 star 哦，，这里是完整代码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/dxfl)

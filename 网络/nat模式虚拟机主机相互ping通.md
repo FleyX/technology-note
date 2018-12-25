@@ -1,3 +1,11 @@
+---
+id="2018-08-04-10-58"
+title="nat模式虚拟机主机相互ping通"
+headWord="如题。"
+tags=["vmware","nat","ping","ubuntu"]
+category="java"
+serie="正则匹配"
+---
 [id]:2018-08-04
 [type]:软件
 [tag]:vmware,vps,nat,ubuntu

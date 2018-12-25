@@ -1,16 +1,23 @@
-[id]:2018-09-01
-[type]:javaee
-[tag]:java,spring,mysql,mybatis,xml
+---
+id="2018-09-01-10-38"
+title="springboot整合Mybatis(xml和注解)"
+headWord="写的一手好sql就能玩转mybatis，入门难度相较于hibernate小得多。"
+tags=["java", "spring","springboot","mysql","mybatis","xml","注解"]
+category="java"
+serie="spring boot学习"
+---
 
 ## 写在前面
 
-​	刚毕业的第一份工作是java开发，项目中需要用到mybatis，特此记录学习过程，这只是一个简单demo，mybatis用法很多不可能全部写出来，有更复杂的需求建议查看mybatis的官方中文文档，[点击跳转](http://www.mybatis.org/mybatis-3/zh/index.html)。下面时项目环境/版本。
+&emsp;&emsp;项目源代码在github，地址为：[https://github.com/FleyX/demo-project/tree/master/mybatis-test](https://github.com/FleyX/demo-project/tree/master/mybatis-test)，有需要的自取。
+
+​&emsp;&emsp;刚毕业的第一份工作是 java 开发，项目中需要用到 mybatis，特此记录学习过程，这只是一个简单 demo，mybatis 用法很多不可能全部写出来，有更复杂的需求建议查看 mybatis 的官方中文文档，[点击跳转](http://www.mybatis.org/mybatis-3/zh/index.html)。下面时项目环境/版本。
 
 - 开发工具：IDEA
-- jdk版本：1.8
-- springboot版本：2.03
+- jdk 版本：1.8
+- springboot 版本：2.03
 
-其他依赖版本见下面pom.xml:
+其他依赖版本见下面 pom.xml:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -87,13 +94,13 @@
 
 ## 1.创建项目
 
-​	使用idea中的spring initializr生成maven项目，项目命令为mybatis-test，选择web，mysql，mybatis依赖，即可成功。（详细过程不赘述，如有需要学习springboot创建过程，可参考[这篇文章]()。
+​ 使用 idea 中的 spring initializr 生成 maven 项目，项目命令为 mybatis-test，选择 web，mysql，mybatis 依赖，即可成功。（详细过程不赘述，如有需要学习 springboot 创建过程，可参考[这篇文章](http://tapme.top/blog/detail/2018-08-13-10-38)。
 
-​	然后依照上面的pom文件，补齐缺少的依赖。接着创建包entity，service和mybatis映射文件夹mapper，创建。为了方便配置将application.properties改成application.yml。由于我们时REST接口，故不需要static和templates目录。修改完毕后的项目结构如下：
+​ 然后依照上面的 pom 文件，补齐缺少的依赖。接着创建包 entity，service 和 mybatis 映射文件夹 mapper，创建。为了方便配置将 application.properties 改成 application.yml。由于我们时 REST 接口，故不需要 static 和 templates 目录。修改完毕后的项目结构如下：
 
 ![项目结构](./picFolder/pic1.png)
 
-​	修改启动类，增加`@MapperScan("com.example.mybatistest.dao") `,以自动扫描dao目录，避免每个dao都手动加`@Mapper`注解。代码如下：
+​ 修改启动类，增加`@MapperScan("com.example.mybatistest.dao")`,以自动扫描 dao 目录，避免每个 dao 都手动加`@Mapper`注解。代码如下：
 
 ```java
 @SpringBootApplication
@@ -105,7 +112,7 @@ public class MybatisTestApplication {
 }
 ```
 
- 	修改application.yml,配置项目，代码如下：
+修改 application.yml,配置项目，代码如下：
 
 ```yml
 mybatis:
@@ -158,7 +165,7 @@ spring:
 
 ## 2.编写代码
 
-​	首先创建数据表，sql语句如下：
+​ 首先创建数据表，sql 语句如下：
 
 ```sql
 CREATE TABLE `user` (
@@ -170,7 +177,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 ```
 
-​	然后在entity包中创建实体类User.java
+​ 然后在 entity 包中创建实体类 User.java
 
 ```java
 public class User {
@@ -190,7 +197,7 @@ public class User {
 }
 ```
 
-​	在dao包下创建UserDao.java
+​ 在 dao 包下创建 UserDao.java
 
 ```java
 public interface UserDao {
@@ -203,7 +210,7 @@ public interface UserDao {
 }
 ```
 
-​	在mapper文件夹下创建UserMapper.xml,具体的xml编写方法查看文首的官方文档。
+​ 在 mapper 文件夹下创建 UserMapper.xml,具体的 xml 编写方法查看文首的官方文档。
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -215,7 +222,7 @@ public interface UserDao {
     <sql id="BASE_COLUMN">
         id,name,age,password
     </sql>
-    
+
     <insert id="insert" parameterType="com.example.mybatistest.entity.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO <include refid="BASE_TABLE"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -249,13 +256,13 @@ public interface UserDao {
 </mapper>
 ```
 
-​	至此使用mybatis的代码编写完了，之后要用时调用dao接口中的方法即可。
+​ 至此使用 mybatis 的代码编写完了，之后要用时调用 dao 接口中的方法即可。
 
 ## 3.测试
 
-​	我们通过编写service，controller然后使用postman进行测试。
+​ 我们通过编写 service，controller 然后使用 postman 进行测试。
 
-​	首先编写UserService.java,代码如下：
+​ 首先编写 UserService.java,代码如下：
 
 ```java
 @Component
@@ -287,7 +294,7 @@ public class UserService {
 }
 ```
 
-​	编写UserController.java
+​ 编写 UserController.java
 
 ```java
 @RestController
@@ -320,7 +327,7 @@ public class UserController {
 }
 ```
 
-​	启动项目，通过postman进行请求测试，测试结果如下：
+​ 启动项目，通过 postman 进行请求测试，测试结果如下：
 
 - 插入数据：
 
@@ -330,19 +337,15 @@ public class UserController {
 
 ![查询](./picFolder/pic3.png)
 
-
-
 - 分页查询
 
   ![分页查询](./picFolder/pic4.png)
 
+## 4.注解编写 sql
 
+​ 上面使用的是 xml 方式编写 sql 代码，其实 mybatis 也支持在注解中编写 sql，这样可以避免编写复杂的 xml 查询文件，但同时也将 sql 语句耦合到了代码中，也不易实现复杂查询，因此多用于简单 sql 语句的编写。
 
-## 4.注解编写sql
-
-​	上面使用的是xml方式编写sql代码，其实mybatis也支持在注解中编写sql，这样可以避免编写复杂的xml查询文件，但同时也将sql语句耦合到了代码中，也不易实现复杂查询，因此多用于简单sql语句的编写。
-
-​	要使用注解首先将applicaton.yml配置文件中的`mapper-locations: classpath:mapper/*.xml`注释掉。然后在UserDao.java中加入sql注解，代码如下：
+​ 要使用注解首先将 applicaton.yml 配置文件中的`mapper-locations: classpath:mapper/*.xml`注释掉。然后在 UserDao.java 中加入 sql 注解，代码如下：
 
 ```java
 public interface UserDao {
@@ -360,7 +363,3 @@ public interface UserDao {
 ```
 
 然后重新启动项目测试，测试结果跟上面完全一样。
-
-```
-如果对你有帮助记得点赞、收藏哦！
-```

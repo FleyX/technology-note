@@ -1,22 +1,27 @@
-[id]:2018-09-22
-[type]:java
-[tag]:java,reflect,excel,hssfworksheet
+---
+id="2018-09-22-15-57-00"
+title="java导出EXCEL文件"
+headWord="最近在java上做了一个EXCEL的导出功能，写了一个通用类，在这里分享分享，该类支持多sheet，且无需手动进行复杂的类型转换."
+tags=["reflex", "java","excel","hssfworksheet"]
+category="java"
+serie="java工具集"
+---
 
 ## 一、背景
 
-&emsp;&emsp;最近在java上做了一个EXCEL的导出功能，写了一个通用类，在这里分享分享，该类支持多sheet，且无需手动进行复杂的类型转换，只需提供三个参数即可：
+&emsp;&emsp;最近在 java 上做了一个 EXCEL 的导出功能，写了一个通用类，在这里分享分享，该类支持多 sheet，且无需手动进行复杂的类型转换，只需提供三个参数即可：
 
-- `fileName` 
+- `fileName`
 
-  excel文件名
+  excel 文件名
 
 - `HasMap<String,List<?>> data`
 
-  具体的数据，每个List代表一张表的数据，？表示可为任意的自定义对象
+  具体的数据，每个 List 代表一张表的数据，？表示可为任意的自定义对象
 
 - `LinkedHashMap<String,String[][]> headers`
 
-  `Stirng`代表sheet名。每个`String[][] `代表一个sheet的定义，举个例子如下：
+  `Stirng`代表 sheet 名。每个`String[][]`代表一个 sheet 的定义，举个例子如下：
 
   ```java
   String[][] header = {
@@ -26,11 +31,11 @@
   }
   ```
 
-  其中的field1，field2，field3为对象中的属性名，参数1，参数2，参数3为列名，实际上这个指定了列的名称和这个列用到数据对象的哪个属性。
+  其中的 field1，field2，field3 为对象中的属性名，参数 1，参数 2，参数 3 为列名，实际上这个指定了列的名称和这个列用到数据对象的哪个属性。
 
 ## 二、怎么用
 
-&emsp;&emsp;以一个例子来说明怎么用，假设有两个类A和B定义如下：
+&emsp;&emsp;以一个例子来说明怎么用，假设有两个类 A 和 B 定义如下：
 
 ```java
 public class A{
@@ -44,14 +49,14 @@ public class B{
 }
 ```
 
-现在我们通过查询数据库获得了A和B的两个列表：
+现在我们通过查询数据库获得了 A 和 B 的两个列表：
 
 ```java
 List<A> dataA = .....;
 List<B> dataB = .....;
 ```
 
-我们将这两个导出到excel中，首先需要定义sheet：
+我们将这两个导出到 excel 中，首先需要定义 sheet：
 
 ```java
 String[][] sheetA = {
@@ -65,7 +70,7 @@ String[][] sheetB = {
 }
 ```
 
-然后将数据汇总构造一个ExcelUtil：
+然后将数据汇总构造一个 ExcelUtil：
 
 ```java
 String fileName = "测试Excel";
@@ -83,13 +88,13 @@ HSSFWorkbook workbook = excelUtil.createExcel();
 workbook.writeToResponse(workbook,request,response);
 ```
 
-当然通常数据是通过数据库查询的，这里为了演示方便没有从数据库查找。 
+当然通常数据是通过数据库查询的，这里为了演示方便没有从数据库查找。
 
 ## 三、实现原理
 
 &emsp;&emsp;这里简单说明下实现过程，从调用`createExcel()`这里开始
 
-####1、遍历headers创建sheet
+#### 1、遍历 headers 创建 sheet
 
 ```java
     public HSSFWorkbook createExcel() throws Exception {
@@ -107,7 +112,7 @@ workbook.writeToResponse(workbook,request,response);
     }
 ```
 
-将workbook，sheet名，表头数据，行数据传入crateSheet方法中创建sheet。
+将 workbook，sheet 名，表头数据，行数据传入 crateSheet 方法中创建 sheet。
 
 #### 2、创建表头
 
@@ -136,7 +141,7 @@ workbook.writeToResponse(workbook,request,response);
 
 #### 3、插入行数据
 
-&emsp;&emsp;这里是最重要的部分，首先通过数据的类对象获取它的反射属性Field类，然后将属性名和Field做一个hash映射，避免循环查找，提高插入速度，接着通过一个switch语句，根据属性类别设值，主要代码如下：
+&emsp;&emsp;这里是最重要的部分，首先通过数据的类对象获取它的反射属性 Field 类，然后将属性名和 Field 做一个 hash 映射，避免循环查找，提高插入速度，接着通过一个 switch 语句，根据属性类别设值，主要代码如下：
 
 ```java
 /**
@@ -176,6 +181,7 @@ private void setCell(HSSFCell cell, Object obj, Map<String, Field> fieldMap, Str
     }
 }
 ```
-完整代码可以到github上查看下载，这里就不列出来了。
 
-github地址：[点击跳转]()
+完整代码可以到 github 上查看下载，这里就不列出来了。
+
+github 地址：[点击跳转]()

@@ -1,23 +1,29 @@
-[id]:2018-08-25
-[type]:javaee
-[tag]:java,spring,websocket
+---
+id="2018-08-25-10-38"
+title="springboot整合WebSocket"
+headWord="webSocket作为http单向连接的补充，实现了服务端，浏览器端的双向通信，还是有必要了解了解"
+tags=["java", "spring","springboot","WebSocket"]
+category="java"
+serie="spring boot学习"
+---
 
-<h3 id="#一、背景">一、背景</h3>
+### 一、背景
 
-&emsp;&emsp;我们都知道http协议只能浏览器单方面向服务器发起请求获得响应，服务器不能主动向浏览器推送消息。想要实现浏览器的主动推送有两种主流实现方式：
+&emsp;&emsp;我们都知道 http 协议只能浏览器单方面向服务器发起请求获得响应，服务器不能主动向浏览器推送消息。想要实现浏览器的主动推送有两种主流实现方式：
 
 - 轮询：缺点很多，但是实现简单
-- websocket：在浏览器和服务器之间建立tcp连接，实现全双工通信
+- websocket：在浏览器和服务器之间建立 tcp 连接，实现全双工通信
 
-&emsp;&emsp;springboot使用websocket有两种方式，一种是实现简单的websocket，另外一种是实现**STOMP**协议。这一篇实现简单的websocket，STOMP下一篇在讲。
+&emsp;&emsp;springboot 使用 websocket 有两种方式，一种是实现简单的 websocket，另外一种是实现**STOMP**协议。这一篇实现简单的 websocket，STOMP 下一篇在讲。
 
-**注意：如下都是针对使用springboot内置容器**
+**注意：如下都是针对使用 springboot 内置容器**
 
-<h3 id="二、实现">二、实现</h3>
+### 二、实现
 
-<h4 id="1、依赖引入">1、依赖引入</h4>
+#### 1、依赖引入
 
-&emsp;&emsp;要使用websocket关键是`@ServerEndpoint`这个注解，该注解是javaee标准中的注解,tomcat7及以上已经实现了,如果使用传统方法将war包部署到tomcat中，只需要引入如下javaee标准依赖即可：
+&emsp;&emsp;要使用 websocket 关键是`@ServerEndpoint`这个注解，该注解是 javaee 标准中的注解,tomcat7 及以上已经实现了,如果使用传统方法将 war 包部署到 tomcat 中，只需要引入如下 javaee 标准依赖即可：
+
 ```xml
 <dependency>
   <groupId>javax</groupId>
@@ -26,7 +32,9 @@
   <scope>provided</scope>
 </dependency>
 ```
-如使用springboot内置容器,无需引入，springboot已经做了包含。我们只需引入如下依赖即可：
+
+如使用 springboot 内置容器,无需引入，springboot 已经做了包含。我们只需引入如下依赖即可：
+
 ```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -36,9 +44,10 @@
 </dependency>
 ```
 
-<h4 id="2、注入Bean">2、注入Bean</h4>
+#### 2、注入 Bean
 
-&emsp;&emsp;首先注入一个**ServerEndpointExporter**Bean,该Bean会自动注册使用@ServerEndpoint注解申明的websocket endpoint。代码如下：
+&emsp;&emsp;首先注入一个**ServerEndpointExporter**Bean,该 Bean 会自动注册使用@ServerEndpoint 注解申明的 websocket endpoint。代码如下：
+
 ```java
 @Configuration
 public class WebSocketConfig {
@@ -49,9 +58,10 @@ public class WebSocketConfig {
 }
 ```
 
-<h4 id="3、申明endpoint">3、申明endpoint</h4>
+#### 3、申明 endpoint
 
-&emsp;&emsp;建立**MyWebSocket.java**类，在该类中处理websocket逻辑
+&emsp;&emsp;建立**MyWebSocket.java**类，在该类中处理 websocket 逻辑
+
 ```java
 @ServerEndpoint(value = "/websocket") //接受websocket请求路径
 @Component  //注册到spring容器中
@@ -135,49 +145,47 @@ public class MyWebSocket {
 }
 ```
 
-<h4 id="4、客户的实现">4、客户的实现</h4>
+#### 4、客户的实现
 
-&emsp;&emsp;客户端使用h5原生websocket，部分浏览器可能不支持。代码如下：
+&emsp;&emsp;客户端使用 h5 原生 websocket，部分浏览器可能不支持。代码如下：
+
 ```html
 <html>
-
-<head>
+  <head>
     <title>websocket测试</title>
-    <meta charset="utf-8">
-</head>
+    <meta charset="utf-8" />
+  </head>
 
-<body>
+  <body>
     <button onclick="sendMessage()">测试</button>
     <script>
-        let socket = new WebSocket("ws://localhost:8080/websocket");
-        socket.onerror = err => {
-            console.log(err);
-        };
-        socket.onopen = event => {
-            console.log(event);
-        };
-        socket.onmessage = mess => {
-            console.log(mess);
-        };
-        socket.onclose = () => {
-            console.log("连接关闭");
-        };
+      let socket = new WebSocket('ws://localhost:8080/websocket');
+      socket.onerror = err => {
+        console.log(err);
+      };
+      socket.onopen = event => {
+        console.log(event);
+      };
+      socket.onmessage = mess => {
+        console.log(mess);
+      };
+      socket.onclose = () => {
+        console.log('连接关闭');
+      };
 
-        function sendMessage() {
-            if (socket.readyState === 1)
-                socket.send("这是一个测试数据");
-            else
-                alert("尚未建立websocket连接");
-        }
+      function sendMessage() {
+        if (socket.readyState === 1) socket.send('这是一个测试数据');
+        else alert('尚未建立websocket连接');
+      }
     </script>
-</body>
-
+  </body>
 </html>
 ```
 
-<h3 id="三、测试">三、测试</h3>
+### 三、测试
 
-&emsp;&emsp;建立一个controller测试群发，代码如下：
+&emsp;&emsp;建立一个 controller 测试群发，代码如下：
+
 ```java
 @RestController
 public class HomeController {
@@ -188,7 +196,9 @@ public class HomeController {
     }
 }
 ```
-然后打开上面的html，可以看到浏览器和服务器都输出连接成功的信息：
+
+然后打开上面的 html，可以看到浏览器和服务器都输出连接成功的信息：
+
 ```
 浏览器：
 Event {isTrusted: true, type: "open", target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
@@ -196,14 +206,17 @@ Event {isTrusted: true, type: "open", target: WebSocket, currentTarget: WebSock
 服务端：
 2018-08-01 14:05:34.727  INFO 12708 --- [nio-8080-exec-1] com.fxb.h5websocket.MyWebSocket          : 新的连接加入：0
 ```
+
 点击测试按钮，可在服务端看到如下输出：
+
 ```
 2018-08-01 15:00:34.644  INFO 12708 --- [nio-8080-exec-6] com.fxb.h5websocket.MyWebSocket          : 收到客户端2消息：这是一个测试数据
 ```
-再次打开html页面，这样就有两个websocket客户端，然后在浏览器访问[localhost:8080/broadcast](localhost:8080/broadcast)测试群发功能,每个客户端都会输出如下信息：
+
+再次打开 html 页面，这样就有两个 websocket 客户端，然后在浏览器访问[localhost:8080/broadcast](localhost:8080/broadcast)测试群发功能,每个客户端都会输出如下信息：
+
 ```
 MessageEvent {isTrusted: true, data: "这是一条测试广播", origin: "ws://localhost:8080", lastEventId: "", source: null, …}
 ```
-<br/>
-&emsp;&emsp;源码可在[github]()上下载，记得点赞，star哦
 
+&emsp;&emsp;源码可在 [github 下载](https://github.com/FleyX/demo-project/tree/master/h5websocket) 上下载，记得点赞，star 哦

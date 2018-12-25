@@ -1,9 +1,15 @@
-[id]:2018-08-13
-[type]:javaee
-[tag]:java,spring,springboot
-&emsp;&emsp;前面的博客有说到spring boot搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用spring initializr来构建，idea和eclipse都支持这种方式，构建过程类似，这里以idea为例，详细记录构建过程。
+---
+id="2018-08-13-10-38"
+title="springboot搭建"
+headWord="前面的博客有说到spring boot搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用spring initializr来构建，idea和eclipse都支持这种方式，构建过程类似，这里以idea为例，详细记录构建过程。"
+tags=["java", "spring","springboot","idea"]
+category="java"
+serie="spring boot学习"
+---
 
-###1.选择spring initializr
+&emsp;&emsp;前面的博客有说到 spring boot 搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用 spring initializr 来构建，idea 和 eclipse 都支持这种方式，构建过程类似，这里以 idea 为例，详细记录构建过程。
+
+### 1.选择 spring initializr
 
 ![1532967570728](./picFolder/1532967570728.png)
 
@@ -17,25 +23,25 @@ next
 
 #### 3.选择依赖
 
-&emsp;&emsp;在这里选择spring boot版本和web依赖（忽略sql的依赖，如有需要[点击这里](f),单独将mybatis的整合)，后面也可手动编辑pom文件修改增加删除依赖
+&emsp;&emsp;在这里选择 spring boot 版本和 web 依赖（忽略 sql 的依赖，如有需要[点击这里](f),单独将 mybatis 的整合)，后面也可手动编辑 pom 文件修改增加删除依赖
 
 ![1532967938985](./picFolder/1532967938985.png)
 
-这里我们选择web搭建一个简单的REST风格demo。然后next。
+这里我们选择 web 搭建一个简单的 REST 风格 demo。然后 next。
 
-####4.设置项目存放地址
+#### 4.设置项目存放地址
 
 ![1532968024509](./picFolder/1532968024509.png)
 
-这样就成功构建了一个springboot项目。
+这样就成功构建了一个 springboot 项目。
 
 #### 5.测试
 
-&emsp;&emsp;现在新建一个controller包，包下新建一个HelloController,创建之后项目目录结构如下：
+&emsp;&emsp;现在新建一个 controller 包，包下新建一个 HelloController,创建之后项目目录结构如下：
 
 ![1532969025023](./picFolder/1532969025023.png)
 
-HelloController代码如下：
+HelloController 代码如下：
 
 ```java
 @RestController
@@ -48,4 +54,4 @@ public class HelloController{
 }
 ```
 
-然后运行项目，访问localhost:8080/home/hello即可看到hello字符串。
+然后运行项目，访问 localhost:8080/home/hello 即可看到 hello 字符串。

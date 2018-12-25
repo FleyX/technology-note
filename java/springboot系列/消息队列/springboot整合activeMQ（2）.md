@@ -1,3 +1,11 @@
+---
+id="2018-09-06-10-38"
+title="springboot整合ActiveMQ（2）"
+headWord="接着上文来说，这里来说如何实现activemq的主从备份"
+tags=["java", "spring","springboot","消息队列","activeMQ"]
+category="java"
+serie="spring boot学习"
+---
 [id]:2018-09-06
 [type]:javaee
 [tag]:java,spring,activemq
