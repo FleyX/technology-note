@@ -4,7 +4,7 @@ title="linux下mongodb的配置与安装"
 headWord="记录linux下如何安装与配置mongodb"
 tags=["mongodb", "linux"]
 category="linux"
-serie="linux软件安装配置"
+serie="软件相关"
 ---
 
 &emsp;&emsp;首先到官网下载安装包,官网地址如下：[点击跳转](https://www.mongodb.com/download-center/community),选中合适的版本，下面会出现下载链接，然后使用 wget url 下载到当前文件夹下。mongodb 4.04 ubuntu18.04 64 下载命令如下：

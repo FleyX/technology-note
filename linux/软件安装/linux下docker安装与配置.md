@@ -4,7 +4,7 @@ title="linux下mongodb的配置与安装"
 headWord="linux下docker的安装与配置"
 tags=["docker", "linux","ubuntu"]
 category="linux"
-serie="linux软件安装配置"
+serie="软件相关"
 ---
 
 # 一、安装

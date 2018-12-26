@@ -1,0 +1,99 @@
+---
+id="2018-12-26-13-18"
+title="docker简单使用教程"
+headWord="报错是这么产生的，使用装有mysql的镜像创业一个容器，然后在容器中启动mysql就会报错，启动失败。"
+tags=["docker","mysql"]
+category="linux"
+serie="软件相关"
+---
+
+### 1、镜像操作
+
+#### 1. 列出镜像
+
+```bash
+docker images;
+```
+
+#### 2. 删除镜像
+
+```bash
+docker rmi  镜像id/镜像名:版本
+```
+
+#### 3. 搜索镜像
+
+```bash
+docker search 镜像名
+```
+
+#### 4. 拉取镜像
+
+```bash
+#如不加tag默认拉取latest
+docker pull name:tag
+```
+
+#### 5. 镜像导出/导入文件
+
+```bash
+# 使用name:tag或者id确定要导出的镜像，> 导出的路径
+docker save name:tag/id > /home/image-save.tar
+
+# 加载镜像文件到docker中
+docker load /home/image-save.tar
+```
+
+#### 6. 查看镜像创建历史
+
+```bash
+docker history [options] image
+# -H:已可读的格式打印镜像大小和日期，默认使用
+# --no-trunc：显示完整的提交记录
+# -q:仅列出提交记录id
+```
+
+#### 7. 容器保存为镜像
+
+```bash
+docker commit -m "提交信息" -a "作者信息" 容器id/容器名 镜像名:镜像tag
+```
+
+### 2.容器操作
+
+#### 1.通过镜像创建容器
+
+```bash
+docker run -itd -p 3306:3306 -p 9200:9200 --name oms_env oms_env:0.6
+
+# 参数说明
+-i 让容器的标准输入 通常it配合使用
+-t docker分配一个伪终端并绑定到容器的标准输入上
+-d 容器后台运行
+-p 小写p，hostPort:ContainerPort 绑定容器端口到当前主机端口
+-P 大写P，docker随机映射一个端口到容器内部开放的网络端口
+```
+
+#### 2.保存容器到文件/恢复文件到容器
+
+```bash
+# 保存容器到文件
+docker export 容器名/容器id > /home/container_export.tar
+
+docker import < /home/container_export.tar
+```
+
+#### 3.删除容器
+
+```bash
+docker rm 容器id/容器名
+```
+
+#### 4.拷贝文件到容器内
+
+```bash
+docker cp hostPath 容器id:containerPath
+#例如
+docker cp /home/ubuntu ecc:/home
+#将本机的/home/ubuntu目录拷贝到了以ecc开头的容器内的home目录
+```
