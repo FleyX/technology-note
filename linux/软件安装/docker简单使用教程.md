@@ -97,3 +97,12 @@ docker cp hostPath 容器id:containerPath
 docker cp /home/ubuntu ecc:/home
 #将本机的/home/ubuntu目录拷贝到了以ecc开头的容器内的home目录
 ```
+
+#### 5.从容器拷贝文件到主机
+
+```bash
+docker cp 容器id:containerPath hostPath
+#例如
+docker cp ecc:/home/ubuntu /home
+#将ecc开头的容器内的ubuntu目录拷贝到了本机的/home目录
+```
