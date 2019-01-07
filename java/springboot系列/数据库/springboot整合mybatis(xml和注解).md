@@ -9,7 +9,7 @@ serie="spring boot学习"
 
 ## 写在前面
 
-&emsp;&emsp;项目源代码在github，地址为：[https://github.com/FleyX/demo-project/tree/master/mybatis-test](https://github.com/FleyX/demo-project/tree/master/mybatis-test)，有需要的自取。
+&emsp;&emsp;项目源代码在 github，地址为：[https://github.com/FleyX/demo-project/tree/master/mybatis-test](https://github.com/FleyX/demo-project/tree/master/mybatis-test)，有需要的自取。
 
 ​&emsp;&emsp;刚毕业的第一份工作是 java 开发，项目中需要用到 mybatis，特此记录学习过程，这只是一个简单 demo，mybatis 用法很多不可能全部写出来，有更复杂的需求建议查看 mybatis 的官方中文文档，[点击跳转](http://www.mybatis.org/mybatis-3/zh/index.html)。下面时项目环境/版本。
 
@@ -98,9 +98,9 @@ serie="spring boot学习"
 
 ​ 然后依照上面的 pom 文件，补齐缺少的依赖。接着创建包 entity，service 和 mybatis 映射文件夹 mapper，创建。为了方便配置将 application.properties 改成 application.yml。由于我们时 REST 接口，故不需要 static 和 templates 目录。修改完毕后的项目结构如下：
 
-![项目结构](./picFolder/pic1.png)
+![项目结构](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%95%B0%E6%8D%AE%E5%BA%93/20190107101305.png)
 
-​ 修改启动类，增加`@MapperScan("com.example.mybatistest.dao")`,以自动扫描 dao 目录，避免每个 dao 都手动加`@Mapper`注解。代码如下：
+&emsp;&emsp;修改启动类，增加`@MapperScan("com.example.mybatistest.dao")`,以自动扫描 dao 目录，避免每个 dao 都手动加`@Mapper`注解。代码如下：
 
 ```java
 @SpringBootApplication
@@ -331,15 +331,15 @@ public class UserController {
 
 - 插入数据：
 
-![插入](./picFolder/pic2.png)
+![插入](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%95%B0%E6%8D%AE%E5%BA%93/20190107101358.png)
 
 - 查询数据
 
-![查询](./picFolder/pic3.png)
+![查询](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%95%B0%E6%8D%AE%E5%BA%93/20190107101412.png)
 
 - 分页查询
 
-  ![分页查询](./picFolder/pic4.png)
+![分页查询](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%95%B0%E6%8D%AE%E5%BA%93/20190107101608.png)
 
 ## 4.注解编写 sql
 

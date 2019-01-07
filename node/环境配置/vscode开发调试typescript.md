@@ -19,7 +19,7 @@ npm i -g typescript
 
 &emsp;&emsp;以 test 项目为例，在 test 目录下执行`tsc --init`,会在项目目录下产生一个`tsconfig.json`的配置文件,每项配置都有说明，如下图所示：
 
-![tscofnig文件部分截图](./picFolder/tsconfig界面.png)
+![tscofnig文件部分截图](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20190107102602.png)
 
 主要用到的配置项如下：
 
@@ -56,7 +56,7 @@ npm i -g typescript
 
 &emsp;&emsp;首先添加 launch.json,如图所示：
 
-![添加配置](./picFolder/添加配置.png)
+![添加配置](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20190107102624.png)
 
 选中 node 环境，然后将要调试的文件改为输出目录中对应的 js 文件,修改 program 属性：
 
@@ -111,6 +111,6 @@ npm i -g typescript
 
 最后调试页面启动调试，选择代码真实运行的进程，如下图所示：
 
-![vscode符加进程](./picFolder/vscode附加进程.png)
+![vscode符加进程](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20190107102641.png)
 
 &emsp;&emsp;大功告成。。

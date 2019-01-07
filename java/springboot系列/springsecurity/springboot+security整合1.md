@@ -7,7 +7,7 @@ category="java"
 serie="spring boot学习"
 ---
 
-**说明 springboot 版本 2.0.3<br/>项目地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**
+**说明 springboot 版本 2.0.3<br/>源码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**
 
 ## 一、 介绍
 
@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 #### 2、 个性化登录，security 中的登录如下：
 
-![登录过程](./picFolder/pic1.png)
+![登录过程](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springsecurity/20190107101026.png)
 
 - security 需要一个 user 的实体类实现`UserDetails`接口,该实体类最后与系统中用户的实体类分开，代码如下：
 

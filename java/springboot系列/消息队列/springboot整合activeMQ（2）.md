@@ -6,38 +6,34 @@ tags=["java", "spring","springboot","消息队列","activeMQ"]
 category="java"
 serie="spring boot学习"
 ---
-[id]:2018-09-06
-[type]:javaee
-[tag]:java,spring,activemq
 
+&emsp;&emsp;单个 MQ 节点总是不可靠的，一旦该节点出现故障，MQ 服务就不可用了，势必会产生较大的损失。这里记录 activeMQ 如何开启主从备份，一旦 master（主节点故障），slave（从节点）立即提供服务，实现原理是运行多个 MQ 使用同一个持久化数据源，这里以 jdbc 数据源为例。同一时间只有一个节点（节点 A）能够抢到数据库的表锁，其他节点进入阻塞状态，一旦 A 发生错误崩溃，其他节点就会重新获取表锁，获取到锁的节点成为 master，其他节点为 slave，如果节点 A 重新启动，也将成为 slave。
 
-&emsp;&emsp;单个MQ节点总是不可靠的，一旦该节点出现故障，MQ服务就不可用了，势必会产生较大的损失。这里记录activeMQ如何开启主从备份，一旦master（主节点故障），slave（从节点）立即提供服务，实现原理是运行多个MQ使用同一个持久化数据源，这里以jdbc数据源为例。同一时间只有一个节点（节点A）能够抢到数据库的表锁，其他节点进入阻塞状态，一旦A发生错误崩溃，其他节点就会重新获取表锁，获取到锁的节点成为master，其他节点为slave，如果节点A重新启动，也将成为slave。
+&emsp;&emsp;主从备份解决了单节点故障的问题，但是同一时间提供服务的只有一个 master，显然是不能面对数据量的增长，所以需要一种横向拓展的集群方式来解决面临的问题。
 
-​	主从备份解决了单节点故障的问题，但是同一时间提供服务的只有一个master，显然是不能面对数据量的增长，所以需要一种横向拓展的集群方式来解决面临的问题。
-
-### 一、activeMQ设置
+### 一、activeMQ 设置
 
 #### 1、平台版本说明：
 
 - 平台：windows
-- activeMQ版本：5.9.1，[下载地址](https://www.apache.org/dist/activemq/5.9.1/apache-activemq-5.9.1-bin.zip.asc)
-- jdk版本：1.8
+- activeMQ 版本：5.9.1，[下载地址](https://www.apache.org/dist/activemq/5.9.1/apache-activemq-5.9.1-bin.zip.asc)
+- jdk 版本：1.8
 
-#### 2、下载jdbc依赖
+#### 2、下载 jdbc 依赖
 
-&emsp;&emsp;下载下面三个依赖包，放到activeMQ安装目录下的lib文件夹中。
+&emsp;&emsp;下载下面三个依赖包，放到 activeMQ 安装目录下的 lib 文件夹中。
 
-[mysql驱动](http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar)
+[mysql 驱动](http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar)
 
-[dhcp依赖](http://central.maven.org/maven2/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1.jar)
+[dhcp 依赖](http://central.maven.org/maven2/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1.jar)
 
-[commons-pool2依赖](http://maven.aliyun.com/nexus/service/local/artifact/maven/redirect?r=jcenter&g=org.apache.commons&a=commons-pool2&v=2.6.0&e=jar)
+[commons-pool2 依赖](http://maven.aliyun.com/nexus/service/local/artifact/maven/redirect?r=jcenter&g=org.apache.commons&a=commons-pool2&v=2.6.0&e=jar)
 
 ###二、主从备份
 
-####1、修改jettty
+####1、修改 jettty
 
-&emsp;&emsp;首先修改conf->jetty.xml，这里是修改activemq的web管理端口，管理界面账号密码默认为admin/admin
+&emsp;&emsp;首先修改 conf->jetty.xml，这里是修改 activemq 的 web 管理端口，管理界面账号密码默认为 admin/admin
 
 ```xml
 <bean id="jettyPort" class="org.apache.activemq.web.WebConsolePort" init-method="start">
@@ -46,13 +42,13 @@ serie="spring boot学习"
 </bean>
 ```
 
-####2、修改activemq.xml
+####2、修改 activemq.xml
 
-&emsp;&emsp;然后修改conf->activemq.xml
+&emsp;&emsp;然后修改 conf->activemq.xml
 
 - 设置连接方式
 
-  默认是下面五种连接方式都打开，这里我们只要tcp，把其他的都注释掉，然后在这里设置activemq的服务端口，可以看到每种连接方式都对应一个端口。
+  默认是下面五种连接方式都打开，这里我们只要 tcp，把其他的都注释掉，然后在这里设置 activemq 的服务端口，可以看到每种连接方式都对应一个端口。
 
   ```xml
   <transportConnectors>
@@ -65,11 +61,9 @@ serie="spring boot学习"
   </transportConnectors>
   ```
 
-  
+* 设置 jdbc 数据库
 
-- 设置jdbc数据库
-
-  mysql数据库中创建activemq库，在`broker`标签的下面也就是根标签`beans`的下一级创建一个bean节点，内容如下：
+  mysql 数据库中创建 activemq 库，在`broker`标签的下面也就是根标签`beans`的下一级创建一个 bean 节点，内容如下：
 
   ```xml
   <bean id="mysql-qs" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -81,15 +75,15 @@ serie="spring boot学习"
   </bean>
   ```
 
-- 设置数据源
+* 设置数据源
 
-  首先修改broker节点，设置name和persistent(默认为true),也可不做修改，修改后如下：
+  首先修改 broker 节点，设置 name 和 persistent(默认为 true),也可不做修改，修改后如下：
 
   ```xml
   <broker xmlns="http://activemq.apache.org/schema/core" brokerName="mq1" persistent="true" dataDirectory="${activemq.data}">
   ```
 
-  然后设置持久化方式,使用到我们之前设置的mysql-qs
+  然后设置持久化方式,使用到我们之前设置的 mysql-qs
 
   ```xml
   <persistenceAdapter>
@@ -100,7 +94,7 @@ serie="spring boot学习"
 
 #### 3、启动
 
-&emsp;&emsp;设置完毕后启动activemq（双击bin中的acitveMQ.jar)，启动完成后可以看到如下日志信息：
+&emsp;&emsp;设置完毕后启动 activemq（双击 bin 中的 acitveMQ.jar)，启动完成后可以看到如下日志信息：
 
 ```verilog
  INFO | Using a separate dataSource for locking: org.apache.commons.dbcp2.BasicDataSource@179ece50
@@ -108,7 +102,7 @@ serie="spring boot学习"
  INFO | Becoming the master on dataSource: org.apache.commons.dbcp2.BasicDataSource@179ece50
 ```
 
-​	接着我们修改一下tcp服务端口，改为61617，然后重新启动，日志信息如下：
+​ 接着我们修改一下 tcp 服务端口，改为 61617，然后重新启动，日志信息如下：
 
 ```verilog
  INFO | Using a separate dataSource for locking: org.apache.commons.dbcp2.BasicDataSource@179ece50
@@ -123,7 +117,7 @@ serie="spring boot学习"
 
 ### 三、负载均衡
 
-&emsp;&emsp;activemq可以实现多个mq之间进行路由，假设有两个mq，分别为brokerA和brokerB，当一条消息发送到brokerA的队列test中，有一个消费者连上了brokerB，并且想要获取test队列，brokerA中的test队列就会路由到brokerB上。
+&emsp;&emsp;activemq 可以实现多个 mq 之间进行路由，假设有两个 mq，分别为 brokerA 和 brokerB，当一条消息发送到 brokerA 的队列 test 中，有一个消费者连上了 brokerB，并且想要获取 test 队列，brokerA 中的 test 队列就会路由到 brokerB 上。
 
 &emsp;&emsp;&emsp;开启负载均衡需要设置`networkConnectors`节点，静态路由配置如下：
 
@@ -133,24 +127,24 @@ serie="spring boot学习"
 </networkConnectors>
 ```
 
-brokerA和brokerB都要设置该配置，以连上对方。
+brokerA 和 brokerB 都要设置该配置，以连上对方。
 
 ### 四、测试
 
-####1、建立mq
+####1、建立 mq
 
-&emsp;&emsp;组建两组broker，每组做主从配置。
+&emsp;&emsp;组建两组 broker，每组做主从配置。
 
 - brokerA：
-  - 主：设置web管理端口8761,设置mq名称`mq`,设置数据库地址为activemq，设置tcp服务端口61616，设置负载均衡静态路由`static:failover://(tcp://localhost:61618,tcp://localhost:61619)`,然后启动
-  - 从：上面的基础上修改tcp服务端口为61617,然后启动
+  - 主：设置 web 管理端口 8761,设置 mq 名称`mq`,设置数据库地址为 activemq，设置 tcp 服务端口 61616，设置负载均衡静态路由`static:failover://(tcp://localhost:61618,tcp://localhost:61619)`,然后启动
+  - 从：上面的基础上修改 tcp 服务端口为 61617,然后启动
 - brokerB:
-  - 主：设置web管理端口8762，设置mq名称`mq1`,设置数据库地址activemq1，设置tcp服务端口61618，设置负载均衡静态路由`static:failover://(tcp://localhost:61616,tcp://localhost:61617)`,然后启动
-  - 从：上面的基础上修改tcp服务端口为61619，然后启动
+  - 主：设置 web 管理端口 8762，设置 mq 名称`mq1`,设置数据库地址 activemq1，设置 tcp 服务端口 61618，设置负载均衡静态路由`static:failover://(tcp://localhost:61616,tcp://localhost:61617)`,然后启动
+  - 从：上面的基础上修改 tcp 服务端口为 61619，然后启动
 
-#### 2、springboot测试
+#### 2、springboot 测试
 
-&emsp;&emsp;&emsp;沿用上一篇的项目，修改配置文件的broker-url为`failover:(tcp://localhost:61616,tcp://localhost:61617,tcp://localhost:61618,tcp://localhost:61619)`，然后启动项目访问会在控制台看到如下日志：
+&emsp;&emsp;&emsp;沿用上一篇的项目，修改配置文件的 broker-url 为`failover:(tcp://localhost:61616,tcp://localhost:61617,tcp://localhost:61618,tcp://localhost:61619)`，然后启动项目访问会在控制台看到如下日志：
 
 ```java
 2018-07-31 15:09:25.076  INFO 12780 --- [ActiveMQ Task-1] o.a.a.t.failover.FailoverTransport       : Successfully connected to tcp://localhost:61618

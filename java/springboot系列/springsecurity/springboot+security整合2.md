@@ -6,18 +6,16 @@ tags=["java", "spring","springboot","spring-security","security"]
 category="java"
 serie="spring boot学习"
 ---
-[id]:2018-08-21
-[type]:javaee
-[tag]:java,spring,springsecurity,scurity
 
-&emsp;&emsp;紧接着上一篇，上一篇中登录验证都由security帮助我们完成了，如果我们想要增加一个验证码登录或者其它的自定义校验就没办法了，因此这一篇讲解如何实现这个功能。
+&emsp;&emsp;紧接着上一篇，上一篇中登录验证都由 security 帮助我们完成了，如果我们想要增加一个验证码登录或者其它的自定义校验就没办法了，因此这一篇讲解如何实现这个功能。
 
 ##一、 实现自定义登录校验类
 
-&emsp;&emsp;继承UsernamePasswordAuthenticationFilter类来拓展登录校验，代码如下：
+&emsp;&emsp;继承 UsernamePasswordAuthenticationFilter 类来拓展登录校验，代码如下：
+
 ```java
 public class MyUsernamePasswordAuthentication extends UsernamePasswordAuthenticationFilter{
-	
+
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Override
@@ -37,8 +35,9 @@ public class MyUsernamePasswordAuthentication extends UsernamePasswordAuthentica
 }
 ```
 
-##二、 将自定义登录配置到security中
-&emsp;&emsp;编写自定义登录过滤器后，configure Bean修改为如下：
+##二、 将自定义登录配置到 security 中
+&emsp;&emsp;编写自定义登录过滤器后，configure Bean 修改为如下：
+
 ```java
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -84,7 +83,9 @@ public class MyUsernamePasswordAuthentication extends UsernamePasswordAuthentica
 			.logoutSuccessHandler(myLogoutSuccessHandle);
 	}
 ```
-然后再编写Bean，代码如下：
+
+然后再编写 Bean，代码如下：
+
 ```java
 @Bean
 public MyUsernamePasswordAuthentication myUsernamePasswordAuthentication(){
@@ -98,4 +99,5 @@ public MyUsernamePasswordAuthentication myUsernamePasswordAuthentication(){
     return myUsernamePasswordAuthentication;
 }
 ```
+
 完成。

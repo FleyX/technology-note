@@ -9,9 +9,11 @@ serie="踩坑"
 
 &emsp;&emsp;项目组最近加了一个新功能到代码中，使用 flyway 记录数据库版本变更，该工具会记录每次数据库结构的修改并生成 sql 文件存在指定目录上（当然必须用它来变更数据库，外部的变更它是无法感知的），然后每次启动时 flyway 会检查使用的数据库和当前项目代码中的 sql 变更版本是否一致，一致正常启动，不一致中如果是数据库落后将会更新数据库（这样能够保证代码在任何地方运行数据库都是一致的),否则就报错了。数据库中有一张表记录版本信息，如下图：
 
-![版本记录](./picFolder/版本记录.PNG),同时本地代码中也有一个文件夹保存每次操作的 sql 语句，如下图：
+![版本记录](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E5%85%B6%E4%BB%96%E5%90%84%E7%A7%8D/20190107102736.PNG)
 
-![版本sql](./picFolder/版本sql.PNG)
+同时本地代码中也有一个文件夹保存每次操作的 sql 语句，如下图：
+
+![版本sql](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E5%85%B6%E4%BB%96%E5%90%84%E7%A7%8D/20190107102748.PNG)
 
 通过对比 checksum 值来判断当前 sql 语句和生成数据库的执行语句是否一致，checksum 值由 CRC32 计算后处理得出。
 

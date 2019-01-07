@@ -8,7 +8,8 @@ serie="spring boot学习"
 ---
 
 &emsp;&emsp;这篇讲解如何自定义鉴权过程，实现根据数据库查询出的 url 和 method 是否匹配当前请求的 url 和 method 来决定有没有权限。security 鉴权过程如下：
-![鉴权流程](./picFolder/pic2.png)
+
+![鉴权流程](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springsecurity/20190107101130.png)
 
 ## 一、 重写 metadataSource 类
 
@@ -173,6 +174,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager{
 ```
 
 ## 三、 编写 MyFilterSecurityInterceptor 类
+
 &emsp;&emsp;该类继承 AbstractSecurityInterceptor 类，实现 Filter 接口,代码如下：
 
 ```java

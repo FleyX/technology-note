@@ -37,7 +37,8 @@ spring:
 ### 2. 创建生产者消费者
 
 &emsp;&emsp;springboot 中 activeMQ 的默认配置为**生产-消费者模式**，还有一种模式为**发布-订阅模式**后面再讲。项目目录如下：
-![项目目录](./picFolder/pic1.png)
+
+![项目目录](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/20190107101724.png)
 
 &emsp;&emsp;首先编写配置类 Config.java，代码如下
 
@@ -57,7 +58,8 @@ public class Config {
 ```
 
 上面的代码建立了两个消息队列 queue1，queue2,分别由 queue1 和 queue2 这两个 Bean 注入到 Spring 容器中。程序运行后会在 activeMQ 的管理页面->queue 中看到如下：
-![队列](./picFolder/pic2.png)
+
+![队列](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/20190107101745.png)
 
 &emsp;&emsp;生产者 Producer.java 代码如下：
 
@@ -132,5 +134,7 @@ public class Comsumer {
 ```
 
 消息都成功被消费者消费，从打印结果也可看出生产者消费者的一个特点：一个消息只会被一个消费者消费。同时在管理页面中可以看到：
-![运行结果](./picFolder/pic3.png)
+
+![运行结果](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/20190107101808.png)
+
 每个消息队列有两个消费者，队列进入了三个消息，出了三个消息，说明消息都被消费掉了，如果注释掉消费者代码，再次运行，然后发送消息就会发现 MessagesEnqueued 数量大于 MessagesDequeued，然后再让消费者上线会立即消费掉队列中的消息。

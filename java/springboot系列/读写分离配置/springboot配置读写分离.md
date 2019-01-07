@@ -42,7 +42,7 @@ serie="spring boot学习"
 
   然后重启数据库，使用`show master status;`语句查看主库状态，如下所示：
 
-![主库状态](./picFolder/pic1.png)
+![主库状态](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/20190107101953.png)
 
 - 从库配置
 
@@ -68,9 +68,9 @@ serie="spring boot学习"
 
   接着运行`start slave;`开启备份,正常情况如下图所示：Slave_IO_Running 和 Slave_SQL_Running 都为 yes。
 
-  ![1536223020742](./picFolder/pic2.png)
+  ![状态](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/20190107102024.png)
 
-  可以用这个步骤开启多个从库。
+可以用这个步骤开启多个从库。
 
 &emsp;&emsp;默认情况下备份是主库的全部操作都会备份到从库，实际可能需要忽略某些库，可以在主库中增加如下配置：
 
@@ -315,6 +315,6 @@ public class ReadOnlyInterceptor implements Ordered {
 
 &emsp;&emsp;编写好代码来试试结果如何，下面是运行截图：
 
-![1536312274474](./picFolder/pic3.png)
+![测试结果](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/20190107102056.png)
 
 &emsp;&emsp;断断续续写了好几天终于是写完了，，，如果有帮助到你，，欢迎 star 哦，，这里是完整代码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/dxfl)

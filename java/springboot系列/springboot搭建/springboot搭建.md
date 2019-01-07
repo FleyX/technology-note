@@ -11,13 +11,13 @@ serie="spring boot学习"
 
 ### 1.选择 spring initializr
 
-![1532967570728](./picFolder/1532967570728.png)
+![选择spring initializr](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springboot%E6%90%AD%E5%BB%BA/20190107100435.png)
 
 next
 
 #### 2.设置参数
 
-![1532967772110](./picFolder/1532967772110.png)
+![设置参数](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springboot%E6%90%AD%E5%BB%BA/20190107100509.png)
 
 next
 
@@ -25,13 +25,13 @@ next
 
 &emsp;&emsp;在这里选择 spring boot 版本和 web 依赖（忽略 sql 的依赖，如有需要[点击这里](f),单独将 mybatis 的整合)，后面也可手动编辑 pom 文件修改增加删除依赖
 
-![1532967938985](./picFolder/1532967938985.png)
+![依赖选择](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springboot%E6%90%AD%E5%BB%BA/20190107100609.png)
 
 这里我们选择 web 搭建一个简单的 REST 风格 demo。然后 next。
 
 #### 4.设置项目存放地址
 
-![1532968024509](./picFolder/1532968024509.png)
+![设置项目存放地址](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springboot%E6%90%AD%E5%BB%BA/20190107100653.png)
 
 这样就成功构建了一个 springboot 项目。
 
@@ -39,7 +39,7 @@ next
 
 &emsp;&emsp;现在新建一个 controller 包，包下新建一个 HelloController,创建之后项目目录结构如下：
 
-![1532969025023](./picFolder/1532969025023.png)
+![项目目录结构](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springboot%E6%90%AD%E5%BB%BA/20190107100803.png)
 
 HelloController 代码如下：
 
@@ -54,4 +54,4 @@ public class HelloController{
 }
 ```
 
-然后运行项目，访问 localhost:8080/home/hello 即可看到 hello 字符串。
+然后运行项目，访问 [localhost:8080/home/hello](localhost:8080/home/hello) 即可看到 hello 字符串。

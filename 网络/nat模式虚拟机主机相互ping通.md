@@ -6,35 +6,32 @@ tags=["vmware","nat","ping","ubuntu"]
 category="java"
 serie="正则匹配"
 ---
-[id]:2018-08-04
-[type]:软件
-[tag]:vmware,vps,nat,ubuntu
 
-## 1、wmware设置
+## 1、wmware 设置
 
-&emsp;&emsp;这篇记录下nat网络模式下虚拟机与主机的相互ping通。首先使用wmware建立一个ubuntu虚拟机，网络模式选择nat模式。然后点击虚拟网络编辑：
+&emsp;&emsp;这篇记录下 nat 网络模式下虚拟机与主机的相互 ping 通。首先使用 wmware 建立一个 ubuntu 虚拟机，网络模式选择 nat 模式。然后点击虚拟网络编辑：
 
-![1536153781962](./picFolder/pic1.png)
+![虚拟机网络编辑](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%BD%91%E7%BB%9C/20190107102915.png)
 
-接下来点击nat设置：
+接下来点击 nat 设置：
 
-![1536153954193](./picFolder/pic2.png)
+![nat设置](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%BD%91%E7%BB%9C/20190107102934.png)
 
 看到如下：
 
-![pic3](./picFolder/pic3.png)
+![pic](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%BD%91%E7%BB%9C/20190107102951.png)
 
-上面红框是关键，记录这个值，下面虚拟机设置静态ip要用到。
+上面红框是关键，记录这个值，下面虚拟机设置静态 ip 要用到。
 
-## 2、window网络设置
+## 2、window 网络设置
 
-&emsp;&emsp;打开网络适配器页面，选择VMnet,右键->属性->Internet协议版本 4（TCP/IPV4）->属性，设置ip地址为上面上面网关地址最后一个数改成1，比如192.168.128.2就要设置为192.168.128.1，同时设置子网掩码为255.255.255.0，默认网关不要填。我的如下：
+&emsp;&emsp;打开网络适配器页面，选择 VMnet,右键->属性->Internet 协议版本 4（TCP/IPV4）->属性，设置 ip 地址为上面上面网关地址最后一个数改成 1，比如 192.168.128.2 就要设置为 192.168.128.1，同时设置子网掩码为 255.255.255.0，默认网关不要填。我的如下：
 
-![pic4](./picFolder/pic4.png)
+![pic4](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%BD%91%E7%BB%9C/20190107103024.png)
 
 **如果想让虚拟机能够访问主机需要关闭主机的防火墙**
 
-## 3、ubuntu设置
+## 3、ubuntu 设置
 
 &emsp;&emsp;编辑/etc/network/interfaces
 
@@ -66,4 +63,4 @@ dns-nameservers 192.168.128.2
 
 ## 3、验证
 
-&emsp;&emsp;现在虚拟机中`ping 192.168.128.1`可以ping通，主机中`ping 192.168.128.129`也可ping通。
+&emsp;&emsp;现在虚拟机中`ping 192.168.128.1`可以 ping 通，主机中`ping 192.168.128.129`也可 ping 通。
