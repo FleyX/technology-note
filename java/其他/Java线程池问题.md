@@ -1,0 +1,65 @@
+---
+id="2019-01-09-20-52"
+title="java线程池使用后到底要不要关闭"
+headWord="最近在开发中用到了java的线程池，然后就很疑惑这个线程池到底要不要手动关闭，感觉是要关闭的，但是没人强调线程池用完要关闭。so今天来试验下到底线程池用完要不要关闭"
+tags=["java","线程池","ThreadPoolExecutor"]
+category="java"
+serie="java基础"
+---
+
+**_本篇原创发布于：_** [java 线程池使用后到底要不要关闭](http://tapme.top/blog/detail/2019-01-09-20-52)
+
+最近在开发中用到了 java 的线程池，然后就很疑惑这个线程池到底要不要手动关闭，感觉是要关闭的，但是没人强调线程池用完要关闭。so 今天来试验下到底线程池用完要不要关闭。
+
+**为避免引起误解被喷，特此说明下：下面的代码是为了验证 gc 在回收线程池对象时，线程池对象管理的线程是否会销毁掉。如下在循环中创建线程池是为了模拟线程池使用一次后不再使用的情况。
+虽然通常线程池都是作为全局变量使用，但是如果作为局部变量使用呢？使用完要不要手动关闭掉？**
+
+# 直接上实验代码
+
+```java
+public static void main(String[] args) throws Exception {
+        //用于获取到本java进程，进而获取总线程数
+    RuntimeMXBean runtimeBean = ManagementFactory.getRuntimeMXBean();
+    String jvmName = runtimeBean.getName();
+    System.out.println("JVM Name = " + jvmName);
+    long pid = Long.valueOf(jvmName.split("@")[0]);
+    System.out.println("JVM PID  = " + pid);
+    ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+    int n = 30000;
+    for (int i = 0; i < n; i++) {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10,20,1000,TimeUnit.SECONDS,new LinkedBlockingDeque<>());
+        for(int j=0;j<10;j++){
+            executor.execute(()->{
+                System.out.println("当前线程总数为："+bean.getThreadCount());
+            });
+        }
+    }
+    Thread.sleep(10000);
+    System.out.println("线程总数为 = " + bean.getThreadCount());
+}
+```
+
+&emsp;&emsp;简单来说就是在一个 for 循环中创建线程池，然后执行一个打印任务（不执行任务线程不会真正创建），打印出当前 java 进程的总线程数，下面是打印部分结果:
+
+![线程](https://raw.githubusercontent.com/FleyX/files/master/java/%E5%85%B6%E4%BB%96/20190109212349.png)
+
+可以看到在创建到 15 万个线程是爆内存，内存占用百分百后 java 应用崩溃。说明线程未被回收。
+
+PS:内存占用百分百后，部分应用开始出现异常，界面花屏，闪屏，不能正常绘制 gui，不知道为啥，即使后面内存占用降下来也一样，只能重启应用。
+
+# 结论
+
+&emsp;&emsp;如果局部使用线程池，用完后不再使用它，一定记得手动关闭线程池,否则跑着跑着就内存爆炸崩溃。回收函数如下：
+
+```java
+//执行此函数后线程池不再接收新任务，并等待所有任务执行完毕后销毁线程。此函数并不会等待线程销毁完毕，而是立即返回的
+executor.shutdown();
+//如想要同步等待线程池完成关闭，可使用下面的函数判断是否都执行完毕了，该函数等待timeout后，返回是否所有任务都执行完毕了
+pool.awaitTermination(timeout,TimeUnit)
+
+//尝试结束所有活动线程，并返回等待队列里的任务
+executor.shutdownNow();
+
+```
+
+**_本篇原创发布于：_** [java 线程池使用后到底要不要关闭](http://tapme.top/blog/detail/2019-01-09-20-52)
