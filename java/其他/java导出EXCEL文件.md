@@ -1,11 +1,17 @@
 ---
-id="2018-09-22-15-57-00"
+id="2018-09-22-15-57"
 title="java导出EXCEL文件"
 headWord="最近在java上做了一个EXCEL的导出功能，写了一个通用类，在这里分享分享，该类支持多sheet，且无需手动进行复杂的类型转换."
-tags=["reflex", "java","excel","hssfworksheet"]
+tags=["reflex", "java","excel","SXSSFWorksheet"]
 category="java"
 serie="java工具集"
 ---
+
+**本篇原创发布于：**[FleyX 的个人博客](tapme.top/blog/detail/2018-09-22-15-57)
+
+**本篇所用到代码**：[github](https://github.com/FleyX/demo-project/blob/master/%E6%9D%82%E9%A1%B9/excel%E5%AF%BC%E5%87%BA.java)
+
+**更新说明：**之前用的`HSSFWorkbook`有爆内存的风险，当数据量有几百万时该对象会占用大量内存。更换为`SXSSFWorkbook`可解决内存占用。
 
 ## 一、背景
 
@@ -83,7 +89,7 @@ headers.put("ASheet",sheetA);
 headers.put("BSheet",sheetB);
 ExcelUtil excelUtil = new ExcelUtil(fileName,data,headers);
 //获取表格对象
-HSSFWorkbook workbook = excelUtil.createExcel();
+SXSSFWorkbook workbook = excelUtil.createExcel();
 //这里内置了一个写到response的方法（判断浏览器类型设置合适的参数），如果想写到文件也是类似的
 workbook.writeToResponse(workbook,request,response);
 ```
@@ -97,9 +103,10 @@ workbook.writeToResponse(workbook,request,response);
 #### 1、遍历 headers 创建 sheet
 
 ```java
-    public HSSFWorkbook createExcel() throws Exception {
+    public SXSSFWorkbook createExcel() throws Exception {
         try {
-            HSSFWorkbook workbook = new HSSFWorkbook();
+            //只在内存中保留五百条记录，五百条之前的会写到磁盘上，后面无法再操作
+            SXSSFWorkbook workbook = new SXSSFWorkbook(500);
             //遍历headers创建表格
             for (String key : headers.keySet()) {
                 this.createSheet(workbook, key, headers.get(key), this.data.get(key));
@@ -119,24 +126,44 @@ workbook.writeToResponse(workbook,request,response);
 &emsp;&emsp;表头也就是一个表格的第一行，通常用来对列进行说明
 
 ```java
-        HSSFSheet sheet = workbook.createSheet(sheetName);
-        // 列数
-        int cellNum = header.length;
+    private void createSheet(SXSSFWorkbook workbook, String sheetName, String[][] header, List<?> data) throws Exception {
+        Sheet sheet = workbook.createSheet(sheetName);
         // 单元行，单元格
-        HSSFRow row;
-        HSSFCell cell;
-        // 表头单元格样式
-        HSSFCellStyle columnTopStyle = this.getColumnTopStyle(workbook);
-        // 设置表头
+        Row row;
+        Cell cell;
+        //列数
+        int cellNum = header.length;
+        //设置表头
         row = sheet.createRow(0);
         for (int i = 0; i < cellNum; i++) {
             cell = row.createCell(i);
-            cell.setCellStyle(columnTopStyle);
             String str = header[i][1];
             cell.setCellValue(str);
-            // 设置列宽为表头的文字宽度+6个半角符号宽度
+            //设置列宽为表头的宽度+4
             sheet.setColumnWidth(i, (str.getBytes("utf-8").length + 6) * 256);
         }
+
+        int rowNum = data.size();
+        if (rowNum == 0) {
+            return;
+        }
+        //获取Object 属性名与field属性的映射，后面通过反射获取值来设置到cell
+        Field[] fields = data.get(0).getClass().getDeclaredFields();
+        Map<String, Field> fieldMap = new HashMap<>(fields.length);
+        for (Field field : fields) {
+            field.setAccessible(true);
+            fieldMap.put(field.getName(), field);
+        }
+        Object object;
+        for (int i = 0; i < rowNum; i++) {
+            row = sheet.createRow(i + 1);
+            object = data.get(i);
+            for (int j = 0; j < cellNum; j++) {
+                cell = row.createCell(j);
+                this.setCell(cell, object, fieldMap, header[j][0]);
+            }
+        }
+    }
 ```
 
 #### 3、插入行数据
@@ -144,44 +171,41 @@ workbook.writeToResponse(workbook,request,response);
 &emsp;&emsp;这里是最重要的部分，首先通过数据的类对象获取它的反射属性 Field 类，然后将属性名和 Field 做一个 hash 映射，避免循环查找，提高插入速度，接着通过一个 switch 语句，根据属性类别设值，主要代码如下：
 
 ```java
-/**
- * 设置单元格,根据fieldName获取对应的Field类，使用反射得到值
- *
- * @param cell 单元格实例
- * @param obj 存有属性的对象实例
- * @param fieldMap  属性名与Field的映射
- * @param fieldName 属性名
- */
-private void setCell(HSSFCell cell, Object obj, Map<String, Field> fieldMap, String fieldName) throws Exception {
-    //获取该属性的Field对象
-    Field field = fieldMap.get(fieldName);
-    //通过反射获取属性的值，由于不能确定该值的类型，用下面的判断语句进行合适的转型
-    Object value = field.get(obj);
-    if (value == null) {
-        cell.setCellValue("");
-    } else {
-        switch (field.getGenericType().getTypeName()) {
-        case "java.lang.String":
-            cell.setCellValue((String) value);
-            break;
-        case "java.lang.Integer":
-        case "int":
-            cell.setCellValue((int) value);
-            break;
-        case "java.lang.Double":
-        case "double":
-            cell.setCellValue((double) value);
-            break;
-        case "java.util.Date":
-            cell.setCellValue(this.dateFormat.format((Date) value));
-            break;
-        default:
-            cell.setCellValue(obj.toString());
+    private void setCell(Cell cell, Object obj, Map<String, Field> fieldMap, String fieldName) throws Exception {
+        Field field = fieldMap.get(fieldName);
+        if(field == null){
+            throw new Exception("找不到 "+fieldName+" 数据项");
+        }
+        Object value = field.get(obj);
+        if (value == null) {
+            cell.setCellValue("");
+        } else {
+            switch (field.getGenericType().getTypeName()) {
+                case "java.lang.String":
+                    cell.setCellValue((String) value);
+                    break;
+                case "java.lang.Integer":
+                case "int":
+                    cell.setCellValue((int) value);
+                    break;
+                case "java.lang.Double":
+                case "double":
+                    cell.setCellValue((double) value);
+                    break;
+                case "java.util.Date":
+                    cell.setCellValue(this.dateFormat.format((Date) value));
+                    break;
+                default:
+                    cell.setCellValue(obj.toString());
+            }
         }
     }
-}
 ```
 
 完整代码可以到 github 上查看下载，这里就不列出来了。
 
-github 地址：[点击跳转]()
+github 地址：
+
+**本篇所用到代码**：[github](https://github.com/FleyX/demo-project/blob/master/%E6%9D%82%E9%A1%B9/excel%E5%AF%BC%E5%87%BA.java)
+
+**本篇原创发布于：**[FleyX 的个人博客](tapme.top/blog/detail/2018-09-22-15-57)
