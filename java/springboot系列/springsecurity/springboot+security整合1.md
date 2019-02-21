@@ -1,10 +1,11 @@
 ---
-id="2018-08-20-10-38"
-title="springboot+security整合（1）"
-headWord="javaee中的非常重要的一个安全认证框架，但是略微重量级，但是既然领导交代要学，那就学吧。。。"
-tags=["java", "spring","springboot","spring-security","security"]
-category="java"
-serie="spring boot学习"
+id: "2018-08-20-10-38"
+title: "springboot+security整合（1）"
+headWord: "javaee中的非常重要的一个安全认证框架，但是略微重量级，但是既然领导交代要学，那就学吧。。。"
+tags: ["java", "spring","springboot","spring-security","security"]
+categories: 
+- "java"
+- "spring boot学习"
 ---
 
 **说明 springboot 版本 2.0.3<br/>源码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**

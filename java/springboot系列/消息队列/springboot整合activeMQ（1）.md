@@ -1,10 +1,11 @@
 ---
-id="2018-09-05-10-38"
-title="springboot整合ActiveMQ（1）"
-headWord="稍大的项目中都会用到mq消息队列，so这个自然也是要学的，为啥是activeMQ呢?刚好目前的项目中用的就是这个拉。"
-tags=["java", "spring","springboot","消息队列","activeMQ"]
-category="java"
-serie="spring boot学习"
+id: "2018-09-05-10-38"
+title: "springboot整合ActiveMQ（1）"
+headWord: "稍大的项目中都会用到mq消息队列，so这个自然也是要学的，为啥是activeMQ呢?刚好目前的项目中用的就是这个拉。"
+tags: ["java", "spring","springboot","消息队列","activeMQ"]
+categories: 
+- "java"
+- "spring boot学习"
 ---
 
 **说明：acitveMQ 版本为：5.9.1，springboot 版本为 2.0.3,项目地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/jms_demo)**<br/>

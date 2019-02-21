@@ -1,10 +1,11 @@
 ---
-id="2018-12-17-13-58"
-title="vscode开发调试typescript"
-headWord="本篇用于记录如何在vscode下开发typescript以及端点调试ts代码"
-tags=["vscode", "node","typescript","ts"]
-category="node"
-serie="node开发配置"
+id: "2018-12-17-13-58"
+title: "vscode开发调试typescript"
+headWord: "本篇用于记录如何在vscode下开发typescript以及端点调试ts代码"
+tags: ["vscode", "node","typescript","ts"]
+categories: 
+- "node"
+- node开发配置"
 ---
 
 ### 1、安装 typescript
