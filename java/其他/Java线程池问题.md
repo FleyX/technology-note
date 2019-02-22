@@ -1,10 +1,11 @@
 ---
-id="2019-01-09-20-52"
-title="java线程池使用后到底要不要关闭"
-headWord="最近在开发中用到了java的线程池，然后就很疑惑这个线程池到底要不要手动关闭，感觉是要关闭的，但是没人强调线程池用完要关闭。so今天来试验下到底线程池用完要不要关闭"
-tags=["java","线程池","ThreadPoolExecutor"]
-category="java"
-serie="java基础"
+id: "2019-01-09-20-52"
+title: "java线程池使用后到底要不要关闭"
+headWord: "最近在开发中用到了java的线程池，然后就很疑惑这个线程池到底要不要手动关闭，感觉是要关闭的，但是没人强调线程池用完要关闭。so今天来试验下到底线程池用完要不要关闭"
+tags: ["java","线程池","ThreadPoolExecutor"]
+categories: 
+- "java"
+- "java基础"
 ---
 
 **_本篇原创发布于：_** [java 线程池使用后到底要不要关闭](http://tapme.top/blog/detail/2019-01-09-20-52)

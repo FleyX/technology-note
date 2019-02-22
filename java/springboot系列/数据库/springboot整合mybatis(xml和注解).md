@@ -1,10 +1,11 @@
 ---
-id="2018-09-01-10-38"
-title="springboot整合Mybatis(xml和注解)"
-headWord="写的一手好sql就能玩转mybatis，入门难度相较于hibernate小得多。"
-tags=["java", "spring","springboot","mysql","mybatis","xml","注解"]
-category="java"
-serie="spring boot学习"
+id: "2018-09-01-10-38"
+title: "springboot整合Mybatis(xml和注解)"
+headWord: "写的一手好sql就能玩转mybatis，入门难度相较于hibernate小得多。"
+tag: ["java", "spring","springboot","mysql","mybatis","xml","注解"]
+categories: 
+- "java"
+- "spring boot学习"
 ---
 
 ## 写在前面

@@ -1,10 +1,11 @@
 ---
-id="2018-08-13-10-38"
-title="springboot搭建"
-headWord="前面的博客有说到spring boot搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用spring initializr来构建，idea和eclipse都支持这种方式，构建过程类似，这里以idea为例，详细记录构建过程。"
-tags=["java", "spring","springboot","idea"]
-category="java"
-serie="spring boot学习"
+id: "2018-08-13-10-38"
+title: "springboot搭建"
+headWord: "前面的博客有说到spring boot搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用spring initializr来构建，idea和eclipse都支持这种方式，构建过程类似，这里以idea为例，详细记录构建过程。"
+tags: ["java", "spring","springboot","idea"]
+categories: 
+- "java"
+- "spring boot学习"
 ---
 
 &emsp;&emsp;前面的博客有说到 spring boot 搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用 spring initializr 来构建，idea 和 eclipse 都支持这种方式，构建过程类似，这里以 idea 为例，详细记录构建过程。
