@@ -1,6 +1,6 @@
 ---
 id: "2019-01-09-20-52"
-date: "2019-01-09-20-52"
+date: "2019/01/09 20:52"
 title: "java线程池使用后到底要不要关闭"
 tags: ["java", "线程池", "ThreadPoolExecutor"]
 categories:

@@ -1,6 +1,6 @@
 ---
 id: "2018-09-01-10-38"
-date: "2018-09-01-10-38"
+date: "2018/09/01 10:38:00"
 title: "springboot整合Mybatis(xml和注解)"
 tag: ["java", "spring","springboot","mysql","mybatis","xml","注解"]
 categories: 

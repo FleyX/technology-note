@@ -1,6 +1,6 @@
 ---
 id: "2018-08-04-10-58"
-date: "2018-08-04-10-58"
+date: 2018/08/04 10:58:00
 title: "nat模式虚拟机主机相互ping通"
 tags: ["vmware","nat","ping","ubuntu"]
 categories: 

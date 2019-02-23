@@ -1,7 +1,8 @@
 ---
 id: "2019-02-22-14-59"
-title: "springboot整合Mybatis(xml和注解)"
-tag: ["java", "","spring-boot","redis","nosql"]
+date: "2019/02/22 14:59:00"
+title: "springboot整合redis"
+tag: ["java","spring-boot","redis","nosql"]
 categories: 
 - "java"
 - "spring boot学习"

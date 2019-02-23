@@ -1,6 +1,6 @@
 ---
 id: "2018-10-01-13-58"
-date: "2018-10-01-13-58"
+date: "2018/10/01 13:58"
 title: "node,vue开发教学管理系统"
 tags: ["node", "vue","element-ui","axios","koa","redis","mysql","jwt"]
 categories: 

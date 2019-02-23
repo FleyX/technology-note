@@ -1,6 +1,6 @@
 ---
 id: "2018-11-20-10-38-05"
-date: "2018-11-20-10-38-05"
+date: "2018/11/20 10:38:05"
 title: "linux下mongodb的配置与安装"
 tags: ["mongodb", "linux"]
 categories: 

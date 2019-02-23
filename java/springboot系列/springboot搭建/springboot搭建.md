@@ -1,6 +1,6 @@
 ---
 id: "2018-08-13-10-38"
-date: "2018-08-13-10-38"
+date: "2018/08/13 10:38:00"
 title: "springboot搭建"
 tags: ["java", "spring","springboot","idea"]
 categories: 

@@ -1,6 +1,6 @@
 ---
 id: "2018-09-05-10-38"
-date: "2018-09-05-10-38"
+date: "2018/09/05 10:38:00"
 title: "springboot整合ActiveMQ（1）"
 tags: ["java", "spring","springboot","消息队列","activeMQ"]
 categories: 

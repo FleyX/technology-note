@@ -1,6 +1,6 @@
 ---
 id: "2018-12-26-11-50"
-date: "2018-12-26-11-50"
+date: "2018/12/26 11:50"
 title: "docker下mysql启动报错"
 tags: ["docker","mysql"]
 categories: 

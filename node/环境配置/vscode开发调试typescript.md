@@ -1,6 +1,6 @@
 ---
 id: "2018-12-17-13-58"
-date: "2018-12-17-13-58"
+date: "2018/12/17 13:58"
 title: "vscode开发调试typescript"
 tags: ["vscode", "node","typescript","ts"]
 categories: 

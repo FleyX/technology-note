@@ -1,6 +1,6 @@
 ---
 id: "2018-09-10-10-38"
-date: "2018-09-10-10-38"
+date: "2018/09/10 10:38:00"
 title: "springboot配置读写分离(Mybatis)"
 tags: ["java", "spring","springboot","mysql","主从备份","读写分离"]
 categories: 

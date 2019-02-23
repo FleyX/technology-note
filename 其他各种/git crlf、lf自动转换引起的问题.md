@@ -1,6 +1,6 @@
 ---
 id: "2018-09-20-10-58"
-date: "2018-09-20-10-58"
+date: "2018/09/20 10:58"
 title: "git crlf、lf自动转换问题"
 tags: ["git","crlf","lf","flyway"]
 categories: 

@@ -1,6 +1,6 @@
 ---
 id: "2018-08-21-10-38"
-date: "2018-08-21-10-38"
+date: "2018/08/21 10:38"
 title: "springboot+security整合（2）"
 tags: ["java", "spring","springboot","spring-security","security"]
 categories: 
