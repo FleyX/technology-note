@@ -1,11 +1,11 @@
 ---
 id: "2018-08-22-10-38"
+date: "2018-08-22-10-38"
 title: "springboot+security整合（3）"
-headWord: "文接上篇，上篇说了那个啥自定义校验的功能，这篇来学学如何自定义鉴权。感觉都定义到这个地步，都不太需要security框架了，再自己整整缓存方面的功能就是一个功能完成的鉴权模块了。"
-tags: ["java", "spring","springboot","spring-security","security"]
-categories: 
-- "java"
-- "spring boot学习"
+tags: ["java", "spring", "springboot", "spring-security", "security"]
+categories:
+  - "java"
+  - "spring boot学习"
 ---
 
 &emsp;&emsp;这篇讲解如何自定义鉴权过程，实现根据数据库查询出的 url 和 method 是否匹配当前请求的 url 和 method 来决定有没有权限。security 鉴权过程如下：
@@ -52,6 +52,8 @@ public class MyGrantedAuthority implements GrantedAuthority {
 ```
 
 2. 编写 MyConfigAttribute 类，实现 ConfigAttribute 接口，代码如下：
+
+<!-- more -->
 
 ```java
 public class MyConfigAttribute implements ConfigAttribute {

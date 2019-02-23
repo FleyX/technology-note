@@ -1,7 +1,7 @@
 ---
 id: "2018-08-21-10-38"
+date: "2018-08-21-10-38"
 title: "springboot+security整合（2）"
-headWord: "文接上篇，上一篇中登录验证都由security帮助我们完成了，如果我们想要增加一个验证码登录或者其它的自定义校验就没办法了，因此这一篇讲解如何实现这个功能。"
 tags: ["java", "spring","springboot","spring-security","security"]
 categories: 
 - "java"
@@ -35,6 +35,8 @@ public class MyUsernamePasswordAuthentication extends UsernamePasswordAuthentica
 	}
 }
 ```
+
+<!-- more -->
 
 ##二、 将自定义登录配置到 security 中
 &emsp;&emsp;编写自定义登录过滤器后，configure Bean 修改为如下：

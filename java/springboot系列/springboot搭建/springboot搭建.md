@@ -1,7 +1,7 @@
 ---
 id: "2018-08-13-10-38"
+date: "2018-08-13-10-38"
 title: "springboot搭建"
-headWord: "前面的博客有说到spring boot搭建见另一篇博文，其实那篇博文还没写，现在来填个坑。我们使用spring initializr来构建，idea和eclipse都支持这种方式，构建过程类似，这里以idea为例，详细记录构建过程。"
 tags: ["java", "spring","springboot","idea"]
 categories: 
 - "java"
@@ -29,6 +29,8 @@ next
 ![依赖选择](https://raw.githubusercontent.com/FleyX/files/master/blogImg/springboot%E6%90%AD%E5%BB%BA/20190107100609.png)
 
 这里我们选择 web 搭建一个简单的 REST 风格 demo。然后 next。
+
+<!-- more -->
 
 #### 4.设置项目存放地址
 

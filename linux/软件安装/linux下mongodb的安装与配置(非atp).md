@@ -1,7 +1,7 @@
 ---
 id: "2018-11-20-10-38-05"
+date: "2018-11-20-10-38-05"
 title: "linux下mongodb的配置与安装"
-headWord: "记录linux下如何安装与配置mongodb"
 tags: ["mongodb", "linux"]
 categories: 
 - "linux"
@@ -38,6 +38,8 @@ auth = true  #开启认证
 ```
 
 &emsp;&emsp;然后就可以启动
+
+<!-- more -->
 
 ```shell
 ./bin/mongod -f mongodb.conf

@@ -1,7 +1,7 @@
 ---
 id: "2018-08-25-10-38"
+date: "2018-08-25-10-38"
 title: "springboot整合WebSocket"
-headWord: "webSocket作为http单向连接的补充，实现了服务端，浏览器端的双向通信，还是有必要了解了解"
 tags: ["java", "spring","springboot","WebSocket"]
 categories: 
 - "java"
@@ -44,6 +44,7 @@ categories:
     <type>pom</type>
 </dependency>
 ```
+<!-- more -->
 
 #### 2、注入 Bean
 

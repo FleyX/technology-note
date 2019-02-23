@@ -1,7 +1,7 @@
 ---
 id: "2018-12-26-11-50"
+date: "2018-12-26-11-50"
 title: "docker下mysql启动报错"
-headWord: "报错是这么产生的，使用装有mysql的镜像创业一个容器，然后在容器中启动mysql就会报错，启动失败。"
 tags: ["docker","mysql"]
 categories: 
 - "linux"

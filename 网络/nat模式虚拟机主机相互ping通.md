@@ -1,11 +1,11 @@
 ---
 id: "2018-08-04-10-58"
+date: "2018-08-04-10-58"
 title: "nat模式虚拟机主机相互ping通"
-headWord: "如题。"
 tags: ["vmware","nat","ping","ubuntu"]
 categories: 
-- "java"
-- "正则匹配"
+- "linux"
+- "软件设置"
 ---
 
 ## 1、wmware 设置
@@ -31,6 +31,8 @@ categories:
 ![pic4](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E7%BD%91%E7%BB%9C/20190107103024.png)
 
 **如果想让虚拟机能够访问主机需要关闭主机的防火墙**
+
+<!-- more -->
 
 ## 3、ubuntu 设置
 

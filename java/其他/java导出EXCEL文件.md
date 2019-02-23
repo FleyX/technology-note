@@ -1,7 +1,7 @@
 ---
 id: "2018-09-22-15-57"
+date: "2018-09-22-15-57"
 title: "java导出EXCEL文件"
-headWord: "最近在java上做了一个EXCEL的导出功能，写了一个通用类，在这里分享分享，该类支持多sheet，且无需手动进行复杂的类型转换."
 tags: ["reflex", "java","excel","SXSSFWorksheet"]
 categories: 
 - "java"
@@ -39,6 +39,8 @@ categories:
   ```
 
   其中的 field1，field2，field3 为对象中的属性名，参数 1，参数 2，参数 3 为列名，实际上这个指定了列的名称和这个列用到数据对象的哪个属性。
+
+<!-- more -->
 
 ## 二、怎么用
 

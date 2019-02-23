@@ -1,7 +1,7 @@
 ---
 id: "2018-09-01-10-38"
+date: "2018-09-01-10-38"
 title: "springboot整合Mybatis(xml和注解)"
-headWord: "写的一手好sql就能玩转mybatis，入门难度相较于hibernate小得多。"
 tag: ["java", "spring","springboot","mysql","mybatis","xml","注解"]
 categories: 
 - "java"
@@ -19,6 +19,8 @@ categories:
 - springboot 版本：2.03
 
 其他依赖版本见下面 pom.xml:
+
+<!-- more -->
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

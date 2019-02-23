@@ -1,7 +1,7 @@
 ---
 id: "2018-08-20-10-38"
+date: "2018-08-20-10-38"
 title: "springboot+security整合（1）"
-headWord: "javaee中的非常重要的一个安全认证框架，但是略微重量级，但是既然领导交代要学，那就学吧。。。"
 tags: ["java", "spring","springboot","spring-security","security"]
 categories: 
 - "java"
@@ -18,6 +18,7 @@ categories:
 
 &emsp;&emsp;建立 springboot2 项目,加入 security 依赖,mybatis 依赖
 
+<!-- more -->
 ```xml
 <dependency>
    <groupId>org.springframework.boot</groupId>

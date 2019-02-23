@@ -1,7 +1,7 @@
 ---
 id: "2019-01-02-17-15"
+date: "2019-01-02-17-15"
 title: "Q807 保持城市天际线(Max Increase to Keep City Skyline)"
-headWord: "leetcode刷题，题目详情见<a href='https://leetcode-cn.com/problems/max-increase-to-keep-city-skyline/'>点击跳转</a>"
 tags: ["java", "leetcode","array",'leetcode']
 categories: 
 - "算法"

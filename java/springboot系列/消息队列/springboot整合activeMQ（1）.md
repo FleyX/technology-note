@@ -1,7 +1,7 @@
 ---
 id: "2018-09-05-10-38"
+date: "2018-09-05-10-38"
 title: "springboot整合ActiveMQ（1）"
-headWord: "稍大的项目中都会用到mq消息队列，so这个自然也是要学的，为啥是activeMQ呢?刚好目前的项目中用的就是这个拉。"
 tags: ["java", "spring","springboot","消息队列","activeMQ"]
 categories: 
 - "java"
@@ -61,6 +61,8 @@ public class Config {
 上面的代码建立了两个消息队列 queue1，queue2,分别由 queue1 和 queue2 这两个 Bean 注入到 Spring 容器中。程序运行后会在 activeMQ 的管理页面->queue 中看到如下：
 
 ![队列](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/20190107101745.png)
+
+<!-- more -->
 
 &emsp;&emsp;生产者 Producer.java 代码如下：
 

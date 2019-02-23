@@ -1,7 +1,7 @@
 ---
 id: "2018-09-10-10-38"
+date: "2018-09-10-10-38"
 title: "springboot配置读写分离(Mybatis)"
-headWord: "近日工作任务较轻，有空学习学习技术，遂来研究如果实现读写分离。这里用博客记录下过程，一方面可备日后查看，同时也能分享给大家（网上的资料真的大都是抄来抄去，，还不带格式的，看的真心难受）。"
 tags: ["java", "spring","springboot","mysql","主从备份","读写分离"]
 categories: 
 - "java"
@@ -44,6 +44,8 @@ categories:
   然后重启数据库，使用`show master status;`语句查看主库状态，如下所示：
 
 ![主库状态](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/20190107101953.png)
+
+<!-- more -->
 
 - 从库配置
 

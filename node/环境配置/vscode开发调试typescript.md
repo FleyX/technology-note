@@ -1,7 +1,7 @@
 ---
 id: "2018-12-17-13-58"
+date: "2018-12-17-13-58"
 title: "vscode开发调试typescript"
-headWord: "本篇用于记录如何在vscode下开发typescript以及端点调试ts代码"
 tags: ["vscode", "node","typescript","ts"]
 categories: 
 - "node"
@@ -52,6 +52,8 @@ npm i -g typescript
 ### 3、编译
 
 &emsp;&emsp;执行`tsc -w`,将 ts 编译位 js 并输出到 dist 目录下，`-w`监控文件变动，自动编译。
+
+<!-- more -->
 
 ### 4、断点运行
 

@@ -1,7 +1,7 @@
 ---
 id: "2018-09-06-10-38"
+date: "2018-09-06-10-38"
 title: "springboot整合ActiveMQ（2）"
-headWord: "接着上文来说，这里来说如何实现activemq的主从备份"
 tags: ["java", "spring","springboot","消息队列","activeMQ"]
 categories: 
 - "java"
@@ -42,6 +42,8 @@ categories:
     <property name="port" value="8161"/>
 </bean>
 ```
+
+<!-- more -->
 
 ####2、修改 activemq.xml
 
