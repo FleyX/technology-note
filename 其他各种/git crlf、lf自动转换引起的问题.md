@@ -2,7 +2,6 @@
 id: "2018-09-20-10-58"
 date: "2018-09-20-10-58"
 title: "git crlf、lf自动转换问题"
-headWord: "踩坑，都是从git拉下来的，就我老是报错，怎么都跑不起来，，花了半天时间排查原因。。。"
 tags: ["git","crlf","lf","flyway"]
 categories: 
 - "其他"
