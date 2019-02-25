@@ -5,7 +5,7 @@ title: "vscode开发调试typescript"
 tags: ["vscode", "node","typescript","ts"]
 categories: 
 - "node"
-- node开发配置"
+- "node开发配置"
 ---
 
 ### 1、安装 typescript
