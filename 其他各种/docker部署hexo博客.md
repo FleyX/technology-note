@@ -43,6 +43,8 @@ git clone git@github.com:FleyX/hexoBlog.git
 
 2. 博文 markdown 文件编写规范,详情参见[分布式事务.md](https://raw.githubusercontent.com/FleyX/technology-note/master/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1.md)：
 
+<!-- more -->
+
 ```yaml
 ---
 id: "2018-10-03-10-58"
