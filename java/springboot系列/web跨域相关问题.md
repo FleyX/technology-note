@@ -1,7 +1,7 @@
 ---
 id: '2019-03-05-13-41'
 date: '2019/03/05 13:41'
-title: 'web跨域相关问题'
+title: 'web跨域及cookie学习'
 tags: ['web', 'http请求跨域', 'cookie共享', 'get', 'post']
 categories:
   - 'web'
