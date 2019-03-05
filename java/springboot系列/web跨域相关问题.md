@@ -1,0 +1,112 @@
+---
+id: '2019-03-05-13-41'
+date: '2019/03/05 13:41'
+title: 'web跨域相关问题'
+tags: ['web', 'http请求跨域', 'cookie共享', 'get', 'post']
+categories:
+  - 'web'
+---
+
+**本篇原创发布于：**[FleyX 的个人博客](http://tapme.top/blog/detail/2019-03-05-13-41)
+
+&emsp;&emsp;之前对于跨域相关的知识一致都很零碎，正好现在的代码中用到了跨域相关的，现在来对这些知识做一个汇总整理，方便自己查看，说不定也可能对你有所帮助。
+
+**本篇主要内容如下：**
+
+- 浏览器同源策略
+- http 请求跨域
+- http 请求跨域解决办法
+- cookie 机制
+- 如何共享 cookie
+
+# 浏览器同源策略
+
+&emsp;&emsp;相信很多人在 web 入门时，都被跨域问题折磨的死去活来。要想完全掌握跨域就得知道为什么会有跨域这个问题出现。
+
+&emsp;&emsp;简单来说跨域问题是因为浏览器的同源策略导致的。那浏览器为什么要有同源策略呢？
+
+&emsp;&emsp;当然是为了安全。没有同源策略限制的浏览器环境是非常危险的（即使有了同源策略也不是百分百安全），有兴趣的可以去了解了解**CSRF**和**XSS**攻击。
+
+&emsp;&emsp;所谓的“同源”指的是“三个相同”：
+
+- 协议相同。不能一个是 http 协议，一个是 https
+- 域名相同
+- 端口相同
+
+<!-- more -->
+
+如果非同源页面有以下限制：
+
+- LocalStore 和 IndexDB 无法读取。这两个显然是不能读取的，但是 cookie 有点不一样，放在后面单独说明
+- DOM 无法获取,比如如法在页面 A 中通过 iframe 获取异源页面 B 的 DOM
+- AJAX 请求无法读取（可以发送请求，但是无法读取到请求结果。比如在页面 A 中请求异源接口 B，请求会正常发出处理，但是在页面 A 中无法获取请求结果，除非响应头 Access-Control-Allow-Headers 中允许了页面 A 的源，这样就能读取到结果）
+
+&emsp;&emsp;但是这里有个例外，所有带“src”属性的标签都可以跨域加载资源，不受同源策略的限制，这样你应该可以想到一个比较古老的跨域解决方案（JSONP）,同时这个特性也会被用作 CSRF 攻击。
+
+# http 请求跨域
+
+&emsp;&emsp;在前端开发中经常会遇到跨域的问题，比如前后端分离中前后端部署在不同的端口上，或者在前端页面中需要向另外一个服务请求数据，这些都会被跨域所阻挡。
+
+目前主要有以下几种办法解决跨域问题：
+
+1. 关闭浏览器同源检查
+
+&emsp;&emsp;这个太暴力，也太不安全了，不用考虑。
+
+2. jsonp 实现跨域请求
+
+&emsp;&emsp;前面说过了浏览器对于带 src 属性的标签都可以跨域的。因此 jsonp 的实现流失利用了这个特性，在页面中动态插入一个`<script>`标签,然后他的 src 属性就是接口调用地址，这样就能访问过去了，然后再讲返回内容特殊处理成立即执行的函数，这样就看起像进行了一次跨域请求。之所以不推荐这种方式，主要有以下两个原因：
+
+- 实现复杂,且需要前后台同时修改才能实现
+- 只能进行 get 请求
+
+3. 服务器设置运行跨域
+
+&emsp;&emsp;这种方法只需要后台做处理便能实现跨域，前面说的 http 跨域请求是能够发出去的，只是不能接收，那我们只要在响应头`Access-Control-Allow-Headers`中加入允许请求的地址即可，以`,`分隔，同时`*`代表所有地址都允许。比如：
+
+```json
+Access-Control-Allow-Headers:http://localhost:8081,http://localhost:8082
+```
+
+本方法是较为常用的一中跨域办法,只需简单修改服务端代码即可。
+
+4. 请求代理
+
+&emsp;&emsp;这也是非常常用的一种跨域方法。跨域限制只是浏览器限制，服务端并没有这个概念，因此我们在前端还是请求同域地址，然后在服务端做一个代理，将请求转发到真正的 ip 和端口上。通常使用 nginx 实现端口转发，比如下面一段 nginx 配置：
+
+```conf
+server {
+    # /test1/abc 转发到 http://a.com:8011/abc
+    location /test1/ {
+        proxy_pass http://a.com:8011/;
+    }
+
+    # /test2/abc 转发到 http://b.com:8011/main/abc
+    location /test2/ {
+        proxy_pass http://b.com:8011/main/;
+    }
+
+    # /test3/abc 转发到 http://c.com:8011/test3/abc
+    location /test3/ {
+        proxy_pass http://c.com:8081;
+    }
+}
+```
+
+# cookie 同源策略
+
+&emsp;&emsp;cookie 的同源策略是通过
+![](https://raw.githubusercontent.com/FleyX/files/master/blogImg/20190305160515.png)
+`Domain`和`path`两个部分来共同确认一个 cookie 在哪些页面上可用。
+
+&emsp;&emsp;`Domain`确定这个 cookie 所属的域名，不能带端口或协议。因此 cookie 便可在不同端口/不同协议下共享,只要域名相同。有一个**例外**是父子域名间也能共享 cookie，只需将 Domain 设置为`.父域名`。
+
+&emsp;&emsp;`path`就简单多了，通过 Domain 确定哪些域名可以共享 cookie，然后在通过`path`来确定 cookie 在哪些路径下可用。使用`/`表示所有路径都可共享。
+
+具体如下：
+
+- Domain : `example`,path : `/a`可获取 cookie:http://example:8081/a,https://example:8081/a
+- Domain : `example`,path : `/`可获取 cookie:http://example:8081/a,https://example:8081/a , http://example:12/abcd
+- Domain : `.example`,path : `/a`可获取 cookie:http://example:8081/a , https://localhost:8081/a , http://test.example:889/a
+
+**注意**:在跨域请求中，即时目标地址有 cookie 且发起请求的页面也能读取到该 cookie，浏览器也不会将 cookie 自动设置到该跨域请求中。比如在http://localhost:8082/a页面中请求http://localhost:8081/abc,这两个地址下拥有共享cookie，http请求也不会携带cookie。
