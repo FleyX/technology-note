@@ -1,20 +1,20 @@
 ---
-id: "2019-03-03-15-42"
-date: "2019-03-03-15-42"
-title: "docker实现hexo博客自动部署，实时更新"
-tags: ["docker", "hexo", "next", "webhook"]
+id: '2019-03-03-15-42'
+date: '2019-03-03-15-42'
+title: 'docker实现hexo博客自动部署，实时更新'
+tags: ['docker', 'hexo', 'next', 'webhook']
 categories:
-  - "其他"
+  - '其他'
 ---
 
 ## 一、背景
 
-&emsp;&emsp;你是否有过想要搭建一个hexo博客，但是看着那冗长的教程，唉声叹气？
+&emsp;&emsp;你是否有过想要搭建一个 hexo 博客，但是看着那冗长的教程，唉声叹气？
 &emsp;&emsp;你是否因为每次发布新的博文，都要重新构建，部署而逐渐放弃写博客？
 
-&emsp;&emsp;现在解决有了完美的解决办法了，一键构建，无需进行复杂的配置，开箱即用。同时支持github的webhook来实现实时构建，只需就行一次push操作，便能自动重新构建发布，无需手动操作。
+&emsp;&emsp;现在解决有了完美的解决办法了，一键构建，无需进行复杂的配置，开箱即用。同时支持 github 的 webhook 来实现实时构建，只需就行一次 push 操作，便能自动重新构建发布，无需手动操作。
 
-&emsp;&emsp;详见[hexoBlog自动构建](https://github.com/FleyX/hexoBlog)
+&emsp;&emsp;详见[hexoBlog 自动构建](https://github.com/FleyX/hexoBlog)
 
 使用方法：
 
@@ -30,16 +30,16 @@ git clone git@github.com:FleyX/hexoBlog.git
 
 ![docker-compose文件修改](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303145035.png)
 
-**github配置webhock步骤如下：**
+**github 配置 webhock 步骤如下：**
 &emsp;&emsp;以我的博文仓库(technology-note)为例：
 
-- 新增一个webhook
-![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303161438.png)
+- 新增一个 webhook
+  ![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303161438.png)
 
-- 配置webhook
-![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303161713.png)
+- 配置 webhook
+  ![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303161713.png)
 
-&emsp;&emsp;将url的地址换为你的服务器地址，然后设置secret密钥，就OK了。再将密钥设置到docker-compose.yml中即可。
+&emsp;&emsp;将 url 的地址换为你的服务器地址，然后设置 secret 密钥，就 OK 了。再将密钥设置到 docker-compose.yml 中即可。
 
 2. 博文 markdown 文件编写规范,详情参见[分布式事务.md](https://raw.githubusercontent.com/FleyX/technology-note/master/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1.md)：
 
@@ -47,13 +47,13 @@ git clone git@github.com:FleyX/hexoBlog.git
 
 ```yaml
 ---
-id: "2018-10-03-10-58"
-date: "2018/10/03 10:58"
-title: "分布式事务"
-tags: ["分布式", "sql", "2PC", "TCC", "异步补偿"]
+id: '2018-10-03-10-58'
+date: '2018/10/03 10:58'
+title: '分布式事务'
+tags: ['分布式', 'sql', '2PC', 'TCC', '异步补偿']
 categories:
-  - "数据库"
-  - "分布式事务"
+  - '数据库'
+  - '分布式事务'
 ---
 
 ```
@@ -93,7 +93,7 @@ categories:
 title: Hexo
 subtitle: To strive, to seek, to find, and not to yield.
 description: To strive, to seek, to find, and not to yield.
-keywords: ["java", "node", "html", "javascript"]
+keywords: ['java', 'node', 'html', 'javascript']
 author: fleyX
 ```
 
@@ -101,25 +101,25 @@ author: fleyX
 
 ### 设置社交信息
 
-&emsp;&emsp;编辑第178行social下项目：
+&emsp;&emsp;编辑第 178 行 social 下项目：
 
 ![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303151851.png)
 
 ### 设置打赏
 
-&emsp;&emsp;编辑327行reward下属性，设置支付宝/微信收款图片，可将图片放到`hexo/source/static/img`目录下。
+&emsp;&emsp;编辑 327 行 reward 下属性，设置支付宝/微信收款图片，可将图片放到`hexo/source/static/img`目录下。
 
 ![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303152128.png)
 
-### 集成gitment评价
+### 集成 gitalk 评论
 
-&emsp;&emsp;建议百度如何配置gitment，这里默认你已经会完毕，拥有id和secret。编辑570行,设置enable为true，然后加入你的信息：
+&emsp;&emsp;建议百度如何在 github 中配置 gitalk，这里默认你已经配置完毕，拥有 id 和 secret。编辑 570 行,设置 enable 为 true，然后加入你的信息：
 
 ![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303152638.png)
 
-### 集成cnzz统计
+### 集成 cnzz 统计
 
-&emsp;&emsp;设置635行，cnzz id即可
+&emsp;&emsp;设置 635 行，cnzz id 即可
 
 ![](https://raw.githubusercontent.com/FleyX/files/master/blog/20190303152519.png)
 
