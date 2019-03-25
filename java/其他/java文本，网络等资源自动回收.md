@@ -1,0 +1,57 @@
+---
+id: '2019-03-25-20-52'
+date: '2019/03/25 20:52'
+title: '更优雅的关闭java文本、网络等资源'
+tags: ['java', 'InputStream', 'OutputStream', 'socket','try-with-resource']
+categories:
+  - 'java'
+  - 'java基础'
+---
+
+&emsp;&emsp;通常在 java 中对文本、网络资源等操作起来是很繁杂的，要声明，读取，关闭三个阶段，还得考虑异常情况。假设我们要读取一段文本显示到控制台，通常会有如下的代码：
+
+```java
+public static void main(String[] args) {
+    FileInputStream inputStream = null;
+    try {
+        inputStream = new FileInputStream("./pom.xml");
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+        BufferedReader reader = new BufferedReader(inputStreamReader);
+        String str;
+        while ((str = reader.readLine()) != null) {
+            System.out.println(str);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (inputStream != null) {
+            try {
+                inputStream.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+}
+```
+
+在 finally 的关闭代码中，还要再来一个 try/catch，看着是不是很难受，很不优雅，很想干掉这个 finally！
+
+&emsp;&emsp;自从 java7 以来这个问题已经有比较好的解决办法了，那就是**try-with-resource**,可能是 jdk 开发人员也觉得之前的关闭资源写法太反人类，所以做了这样的一个语法糖。注意这并不是什么新特性，只是一个语法糖，简化代码的。如果你反编译代码后会发现还是 try/catch/finally 的传统写法。
+
+&emsp;&emsp;try-with-resource 用法如下：
+
+```java
+try (FileInputStream inputStream = new FileInputStream("./pom.xml")) {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+    String str;
+    while ((str = reader.readLine()) != null) {
+        System.out.println(str);
+    }
+} catch (Exception e) {
+    e.printStackTrace();
+}
+```
+
+无需在 finally 中手动关闭 inputStream，凡是实现了 AutoCloseable 接口的，且在 try 后面的括号中创建的，都会在 try/catch 执行完毕后确保调用 close 方法。这么写是不是优雅多了？？
+
+**本文原创发布于：**[http://www.tapme.top/blog/detail/2019-03-25-20-52](http://www.tapme.top/blog/detail/2019-03-25-20-52)
