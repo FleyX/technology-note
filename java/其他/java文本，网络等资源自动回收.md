@@ -2,7 +2,7 @@
 id: '2019-03-25-20-52'
 date: '2019/03/25 20:52'
 title: '更优雅的关闭java文本、网络等资源'
-tags: ['java', 'InputStream', 'OutputStream', 'socket','try-with-resource']
+tags: ['java', 'InputStream', 'OutputStream', 'socket', 'try-with-resource']
 categories:
   - 'java'
   - 'java基础'
@@ -33,6 +33,8 @@ public static void main(String[] args) {
     }
 }
 ```
+
+<!-- more -->
 
 在 finally 的关闭代码中，还要再来一个 try/catch，看着是不是很难受，很不优雅，很想干掉这个 finally！
 
