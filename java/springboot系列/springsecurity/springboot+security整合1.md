@@ -2,10 +2,10 @@
 id: "2018-08-20-10-38"
 date: "2018/08/20 10:38:00"
 title: "springboot+security整合（1）"
-tags: ["java", "spring","springboot","spring-security","security"]
-categories: 
-- "java"
-- "spring boot学习"
+tags: ["java", "spring", "springboot", "spring-security", "security"]
+categories:
+  - "java"
+  - "spring boot学习"
 ---
 
 **说明 springboot 版本 2.0.3<br/>源码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**
@@ -19,6 +19,7 @@ categories:
 &emsp;&emsp;建立 springboot2 项目,加入 security 依赖,mybatis 依赖
 
 <!-- more -->
+
 ```xml
 <dependency>
    <groupId>org.springframework.boot</groupId>
@@ -287,3 +288,5 @@ dataSource 为@Autowired 引入
 ```
 
 在登录表单中设置 remember-me 即可实现记住我功能。
+
+**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-08-20-10-38](https://www.tapme.top/blog/detail/2018-08-20-10-37)
