@@ -104,3 +104,5 @@ public MyUsernamePasswordAuthentication myUsernamePasswordAuthentication(){
 ```
 
 完成。
+
+**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-08-21-10-38](https://www.tapme.top/blog/detail/2018-08-21-10-38)
