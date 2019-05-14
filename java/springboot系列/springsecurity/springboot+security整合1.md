@@ -10,6 +10,12 @@ categories:
 
 **说明 springboot 版本 2.0.3<br/>源码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**
 
+**系列**
+
+- [springboot+security 整合（1）](https://www.tapme.top/blog/detail/2018-08-20-10-37)
+- [springboot+security 整合（2）](https://www.tapme.top/blog/detail/2018-08-21-10-38)
+- [springboot+security 整合（3）](https://www.tapme.top/blog/detail/2018-08-22-10-38)
+
 ## 一、 介绍
 
 &emsp;&emsp;Spring Security 是一个能够为基于 Spring 的企业应用系统提供声明式的安全访问控制解决方案的安全框架。它提供了一组可以在 Spring 应用上下文中配置的 Bean，充分利用了 Spring IoC，DI（控制反转 Inversion of Control ,DI:Dependency Injection 依赖注入）和 AOP（面向切面编程）功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作。

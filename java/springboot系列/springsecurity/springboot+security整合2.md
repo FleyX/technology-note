@@ -2,11 +2,19 @@
 id: "2018-08-21-10-38"
 date: "2018/08/21 10:38"
 title: "springboot+security整合（2）"
-tags: ["java", "spring","springboot","spring-security","security"]
-categories: 
-- "java"
-- "spring boot学习"
+tags: ["java", "spring", "springboot", "spring-security", "security"]
+categories:
+  - "java"
+  - "spring boot学习"
 ---
+
+**说明 springboot 版本 2.0.3<br/>源码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/springboot_spirngsecurity_demo)**
+
+**系列**
+
+- [springboot+security 整合（1）](https://www.tapme.top/blog/detail/2018-08-20-10-37)
+- [springboot+security 整合（2）](https://www.tapme.top/blog/detail/2018-08-21-10-38)
+- [springboot+security 整合（3）](https://www.tapme.top/blog/detail/2018-08-22-10-38)
 
 &emsp;&emsp;紧接着上一篇，上一篇中登录验证都由 security 帮助我们完成了，如果我们想要增加一个验证码登录或者其它的自定义校验就没办法了，因此这一篇讲解如何实现这个功能。
 
