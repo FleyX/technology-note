@@ -2,10 +2,10 @@
 id: "2018-08-25-10-38"
 date: "2018/08/25 10:38:00"
 title: "springboot整合WebSocket"
-tags: ["java", "spring","springboot","WebSocket"]
-categories: 
-- "java"
-- "spring boot学习"
+tags: ["java", "spring", "springboot", "WebSocket"]
+categories:
+  - "java"
+  - "spring boot学习"
 ---
 
 ### 一、背景
@@ -44,6 +44,7 @@ categories:
     <type>pom</type>
 </dependency>
 ```
+
 <!-- more -->
 
 #### 2、注入 Bean
@@ -161,7 +162,7 @@ public class MyWebSocket {
   <body>
     <button onclick="sendMessage()">测试</button>
     <script>
-      let socket = new WebSocket('ws://localhost:8080/websocket');
+      let socket = new WebSocket("ws://localhost:8080/websocket");
       socket.onerror = err => {
         console.log(err);
       };
@@ -172,12 +173,12 @@ public class MyWebSocket {
         console.log(mess);
       };
       socket.onclose = () => {
-        console.log('连接关闭');
+        console.log("连接关闭");
       };
 
       function sendMessage() {
-        if (socket.readyState === 1) socket.send('这是一个测试数据');
-        else alert('尚未建立websocket连接');
+        if (socket.readyState === 1) socket.send("这是一个测试数据");
+        else alert("尚未建立websocket连接");
       }
     </script>
   </body>
@@ -222,3 +223,5 @@ MessageEvent {isTrusted: true, data: "这是一条测试广播", origin: "ws://
 ```
 
 &emsp;&emsp;源码可在 [github 下载](https://github.com/FleyX/demo-project/tree/master/h5websocket) 上下载，记得点赞，star 哦
+
+**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-08-25-10-38](https://www.tapme.top/blog/detail/2018-08-25-10-38)
