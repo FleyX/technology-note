@@ -12,7 +12,7 @@ categories:
 
 &emsp;&emsp;我的毕业设计题目是：教学辅助系统的设计与实现，，是不是很俗。。。至于为啥是这个题目呢，完全是被导师坑了。。。。。
 
-demo地址：ali.tapme.top:8008 123456/123456
+demo地址：[ali.tapme.top:8008](http://ali.tapme.top:8008) 123456/123456
 
 ## 1、需求分析
 
