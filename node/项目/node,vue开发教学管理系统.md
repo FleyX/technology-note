@@ -1,16 +1,20 @@
 ---
 id: "2018-10-01-13-58"
 date: "2018/10/01 13:58"
-title: "node,vue开发教学管理系统"
-tags: ["node", "vue","element-ui","axios","koa","redis","mysql","jwt"]
-categories: 
-- "node"
-- "项目"
+title: "如何用node,vue开发一个管理系统"
+tags: ["node", "vue", "element-ui", "axios", "koa", "redis", "mysql", "jwt"]
+categories:
+  - "node"
+  - "项目"
 ---
 
-&emsp;&emsp;毕业才刚刚两个多月而已，现在想想大学生活是已经是那么的遥不可及，感觉已经过了好久好久，社会了两个月才明白学校的好啊。。。额，扯远了，自从毕业开始就想找个时间写下毕设的记录总结，结果找了好久好久到今天才开始动笔。
+&emsp;&emsp;毕业良久，把当初的毕业设计发出来，给大家参考、参考如何用 vue+node 构建一个功能较为完善的系统。
 
-&emsp;&emsp;我的毕业设计题目是：教学辅助系统的设计与实现，，是不是很俗。。。至于为啥是这个题目呢，完全是被导师坑了。。。。。
+&emsp;&emsp;毕设题目是：教学辅助系统的设计与实现，，至于为啥是这个题目呢，因为导师觉得学校的系统不好用，想让学生做一个好用的出来。虽然这个系统没有难以实现的功能，但是细节太多了，学生端、管理端加起来有几十个页面，还要写对应的接口,然后还得做代码自动判题和判重。然后就变成了现在这个样子，虽然功能都有，但是存在不少细节问题。
+
+但是系统的架构实现大家还是可以参考参考的。
+
+demo 地址：[ali.tapme.top:8008](http://ali.tapme.top:8008)
 
 ## 1、需求分析
 
@@ -37,7 +41,7 @@ categories:
 - 在线答疑，给学生解答
 - 统计分析，包含测试统计和课程统计
 
-洋洋洒洒需求列了一大堆，后面才发现是给自己挖坑，，答辩老师一看这类的题目就不感兴趣了，不论你做的咋样（况且我的演讲能力真的很一般），最后累死累活写了一大堆功能也没太高的分，，不过倒是让我的系统设计能力和代码能力有了不少的提高。
+洋洋洒洒需求列了一大堆，后面才发现是给自己挖坑，，答辩老师一看这类的题目就不感兴趣了，不论你做的咋样（况且我的演讲能力真的很一般），最后累死累活写了一大堆功能也没太高的分，，不过让我的系统设计能力和代码能力有了不少的提高。
 
 <!-- more -->
 
@@ -78,10 +82,10 @@ KOA 作为一个 web 框架其实它本身并没有提供路由功能，需要�
 &emsp;&emsp;KOA 作为一个 web 框架其实它本身并没有提供路由功能，需要配合使用 koa-router 来实现路由，koa-router 以类似下面这样的风格来进行路由：
 
 ```javascript
-const app = require('koa');
-const router = require('koa-router');
-router.get('/hello', koa => {
-  koa.response = 'hello';
+const app = require("koa");
+const router = require("koa-router");
+router.get("/hello", koa => {
+  koa.response = "hello";
 });
 app.use(router.routes());
 ```
@@ -89,27 +93,27 @@ app.use(router.routes());
 显然这样在项目中是很不方便的，如果每个路由都要手动进行挂载，很难将每个文件中的路由都挂载到一个 router 中。因此在参考网上的实现后，我写了一个方法在启动时自动扫描某个文件夹下所有的路由文件并挂载到 router 中，代码如下：
 
 ```javascript
-const fs = require('fs');
-const path = require('path');
-const koaBody = require('koa-body');
-const config = require('../config/config.js');
+const fs = require("fs");
+const path = require("path");
+const koaBody = require("koa-body");
+const config = require("../config/config.js");
 
 function addMapping(router, filePath) {
   let mapping = require(filePath);
   for (let url in mapping) {
-    if (url.startsWith('GET ')) {
+    if (url.startsWith("GET ")) {
       let temp = url.substring(4);
       router.get(temp, mapping[url]);
       console.log(`----GET：${temp}`);
-    } else if (url.startsWith('POST ')) {
+    } else if (url.startsWith("POST ")) {
       let temp = url.substring(5);
       router.post(temp, mapping[url]);
       console.log(`----POST：${temp}`);
-    } else if (url.startsWith('PUT ')) {
+    } else if (url.startsWith("PUT ")) {
       let temp = url.substring(4);
       router.put(temp, mapping[url]);
       console.log(`----PUT：${temp}`);
-    } else if (url.startsWith('DELETE ')) {
+    } else if (url.startsWith("DELETE ")) {
       let temp = url.substring(7);
       router.delete(temp, mapping[url]);
       console.log(`----DELETE: ${temp}`);
@@ -127,8 +131,8 @@ function addControllers(router, filePath) {
     if (state.isDirectory()) {
       addControllers(router, temp);
     } else {
-      if (!temp.endsWith('Helper.js')) {
-        console.log('\n--开始处理: ' + element + '路由');
+      if (!temp.endsWith("Helper.js")) {
+        console.log("\n--开始处理: " + element + "路由");
         addMapping(router, temp);
       }
     }
@@ -153,21 +157,18 @@ app.use(RouterMW(router,path.join(config.rootPath, 'api')));
 然后路由文件以下面的形式编写：
 
 ```javascript
-const knowledgePointDao = require('../dao/knowledgePointDao.js');
+const knowledgePointDao = require("../dao/knowledgePointDao.js");
 
 /**
  * 返回某门课的全部知识点,按章节分类
  */
-exports['GET /course/:c_id/knowledge_point'] = async (ctx, next) => {
+exports["GET /course/:c_id/knowledge_point"] = async (ctx, next) => {
   let res = await knowledgePointDao.getPontsOrderBySection(ctx.params.c_id);
   ctx.onSuccess(res);
 };
 
 //返回某位学生知识点答题情况
-exports['GET /user/:u_id/course/:c_id/knowledge_point/condition'] = async (
-  ctx,
-  next
-) => {
+exports["GET /user/:u_id/course/:c_id/knowledge_point/condition"] = async (ctx, next) => {
   let { u_id, c_id } = ctx.params;
   let res = await knowledgePointDao.getStudentCondition(u_id, c_id);
   ctx.onSuccess(res);
@@ -189,15 +190,13 @@ let token = jwt.sign(
   },
   str,
   {
-    expiresIn: isRememberMe
-      ? config.longTokenExpiration
-      : config.shortTokenExpiration
+    expiresIn: isRememberMe ? config.longTokenExpiration : config.shortTokenExpiration
   }
 );
 //token-盐值存入redis，如想让该token过期，redis中清楚该token键值对即可
 await RedisHelper.setString(token, str, 30 * 24 * 60 * 60);
 res.code = 1;
-res.info = '登录成功';
+res.info = "登录成功";
 res.data = {
   u_type: userInfo.u_type,
   u_id: userInfo.u_id,
@@ -216,7 +215,7 @@ res.data = {
  */
 let verify = async ctx => {
   let token = ctx.headers.authorization;
-  if (typeof token != 'string') {
+  if (typeof token != "string") {
     return 2;
   }
   let yan = await redisHelper.getString(token);
@@ -248,38 +247,27 @@ let verify = async ctx => {
     );
     // await redisHelper.deleteKey(token);
     await redisHelper.setString(newToken, newYan, config.shortTokenExpiration);
-    ctx.response.set('new-token', newToken);
-    ctx.response.set('Access-Control-Expose-Headers', 'new-token');
+    ctx.response.set("new-token", newToken);
+    ctx.response.set("Access-Control-Expose-Headers", "new-token");
   }
   //获取用户信息
-  let userInfoKey = data.u_id + '_userInfo';
+  let userInfoKey = data.u_id + "_userInfo";
   let userInfo = await redisHelper.getString(userInfoKey);
   if (userInfo == null || Object.keys(userInfo).length != 3) {
-    userInfo = await mysqlHelper.first(
-      `select u_id,u_type,j_id from user where u_id=?`,
-      data.u_id
-    );
-    await redisHelper.setString(
-      userInfoKey,
-      JSON.stringify(userInfo),
-      24 * 60 * 60
-    );
+    userInfo = await mysqlHelper.first(`select u_id,u_type,j_id from user where u_id=?`, data.u_id);
+    await redisHelper.setString(userInfoKey, JSON.stringify(userInfo), 24 * 60 * 60);
   } else {
     userInfo = JSON.parse(userInfo);
   }
   ctx.userInfo = userInfo;
   //更新用户上次访问时间
-  mysqlHelper.execute(
-    `update user set last_login_time=? where u_id=?`,
-    Date.now(),
-    userInfo.u_id
-  );
+  mysqlHelper.execute(`update user set last_login_time=? where u_id=?`, Date.now(), userInfo.u_id);
   //管理员拥有全部权限
   if (userInfo.u_type == 0) {
     return 1;
   }
   //获取该用户类型权限
-  let authKey = userInfo.j_id + '_authority';
+  let authKey = userInfo.j_id + "_authority";
   let urls = await redisHelper.getObject(authKey);
   // let urls = null;
   if (urls == null) {
@@ -297,11 +285,7 @@ let verify = async ctx => {
     urls = temp;
   }
   //判断是否拥有权限
-  if (
-    urls.hasOwnProperty(
-      ctx._matchedRoute.replace(config.url_prefix, '') + ctx.method
-    )
-  ) {
+  if (urls.hasOwnProperty(ctx._matchedRoute.replace(config.url_prefix, "") + ctx.method)) {
     return 1;
   } else {
     return 3;
@@ -325,25 +309,25 @@ let verify = async ctx => {
 
 ```javascript
 export default new Router({
-  mode: 'history',
-  base: '/app/',
+  mode: "history",
+  base: "/app/",
   routes: [
     {
-      path: '',
-      name: 'indexPage',
+      path: "",
+      name: "indexPage",
       component: IndexPage
     },
     {
-      path: '/about',
-      name: 'about',
+      path: "/about",
+      name: "about",
       component: About
     },
     Admin,
     Client,
     Public,
     {
-      path: '*',
-      name: 'NotFound',
+      path: "*",
+      name: "NotFound",
       component: NotFound
     }
   ]
@@ -406,13 +390,13 @@ export default {
 ```javascript
 request = (url, method, params, form, isFormData, type) => {
   let token;
-  if (type == 'admin') token = getToken();
+  if (type == "admin") token = getToken();
   else token = getClientToken();
   let headers = {
     Authorization: token
   };
   if (isFormData) {
-    headers['Content-Type'] = 'multipart/form-data';
+    headers["Content-Type"] = "multipart/form-data";
   }
   return new Promise((resolve, reject) => {
     axios({
@@ -427,25 +411,25 @@ request = (url, method, params, form, isFormData, type) => {
         resolve(res.data);
         //检查是否有更新token
         // console.log(res);
-        if (res.headers['new-token'] != undefined) {
-          console.log('set new token');
-          if (vm.$route.path.startsWith('/admin')) {
-            localStorage.setItem('token', res.headers['new-token']);
+        if (res.headers["new-token"] != undefined) {
+          console.log("set new token");
+          if (vm.$route.path.startsWith("/admin")) {
+            localStorage.setItem("token", res.headers["new-token"]);
             window.token = undefined;
-          } else if (vm.$route.path.startsWith('/client')) {
-            localStorage.setItem('clientToken', res.headers['new-token']);
+          } else if (vm.$route.path.startsWith("/client")) {
+            localStorage.setItem("clientToken", res.headers["new-token"]);
             window.clientToken = undefined;
           }
         }
       })
       .catch(err => {
         reject(err);
-        if (err.code == 'ECONNABORTED') {
-          alertNotify('错误', '请求超时', 'error');
+        if (err.code == "ECONNABORTED") {
+          alertNotify("错误", "请求超时", "error");
           return;
         }
-        if (err.message == 'Network Error') {
-          alertNotify('错误', '无法连接服务器', 'error');
+        if (err.message == "Network Error") {
+          alertNotify("错误", "无法连接服务器", "error");
           return;
         }
         if (err.response != undefined) {
@@ -456,49 +440,33 @@ request = (url, method, params, form, isFormData, type) => {
               }
               //使用该变量表示是否已经弹窗提示了，避免大量未登录弹窗堆积。
               window.isGoToLogin = true;
-              vm.$alert(err.response.data, '警告', {
-                type: 'warning',
+              vm.$alert(err.response.data, "警告", {
+                type: "warning",
                 showClose: false
               }).then(res => {
                 window.isGoToLogin = false;
-                if (vm.$route.path.startsWith('/admin/')) {
+                if (vm.$route.path.startsWith("/admin/")) {
                   clearInfo();
-                  vm.$router.replace('/public/admin_login');
+                  vm.$router.replace("/public/admin_login");
                 } else {
                   clearClientInfo();
-                  vm.$router.replace('/public/client_login');
+                  vm.$router.replace("/public/client_login");
                 }
               });
               break;
             case 403:
-              alertNotify(
-                'Error:403',
-                '拒绝执行：' + err.response.data,
-                'error'
-              );
+              alertNotify("Error:403", "拒绝执行：" + err.response.data, "error");
               break;
             case 404:
-              alertNotify(
-                'Error:404',
-                '找不到资源：' + url.substr(0, url.indexOf('?')),
-                'error'
-              );
+              alertNotify("Error:404", "找不到资源：" + url.substr(0, url.indexOf("?")), "error");
               break;
             case 400:
-              alertNotify(
-                'Error:400',
-                '请求参数错误：' + err.response.data,
-                'error'
-              );
+              alertNotify("Error:400", "请求参数错误：" + err.response.data, "error");
               break;
             case 500:
-              alertNotify(
-                'Error:500',
-                '服务器内部错误：' + err.response.data,
-                'error'
-              );
+              alertNotify("Error:500", "服务器内部错误：" + err.response.data, "error");
             default:
-              console.log('存在错误未处理：' + err);
+              console.log("存在错误未处理：" + err);
           }
         } else {
           console.log(err);
