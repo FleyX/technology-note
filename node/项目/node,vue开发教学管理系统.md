@@ -16,9 +16,7 @@ categories:
 
 代码已开源：[https://github.com/FleyX/teach_system](https://github.com/FleyX/teach_system)
 
-demo 地址：[ali.tapme.top:8008](http://ali.tapme.top:8008)
-
-demo地址：[ali.tapme.top:8008](http://ali.tapme.top:8008) 123456/123456
+demo 地址：[ali.tapme.top:8008](http://ali.tapme.top:8008) 123456/123456
 
 ## 1、需求分析
 
