@@ -8,11 +8,13 @@ categories:
   - "项目"
 ---
 
-&emsp;&emsp;毕业良久，把当初的毕业设计发出来，给大家参考、参考如何用 vue+node 构建一个功能较为完善的系统。
+&emsp;&emsp;毕业良久，把当初的毕业设计发出来，给大家参考参考如何用 vue+node 构建一个功能较为完善的系统。
 
 &emsp;&emsp;毕设题目是：教学辅助系统的设计与实现，，至于为啥是这个题目呢，因为导师觉得学校的系统不好用，想让学生做一个好用的出来。虽然这个系统没有难以实现的功能，但是细节太多了，学生端、管理端加起来有几十个页面，还要写对应的接口,然后还得做代码自动判题和判重。然后就变成了现在这个样子，虽然功能都有，但是存在不少细节问题。
 
 但是系统的架构实现大家还是可以参考参考的。
+
+代码已开源：[https://github.com/FleyX/teach_system](https://github.com/FleyX/teach_system)
 
 demo 地址：[ali.tapme.top:8008](http://ali.tapme.top:8008)
 
@@ -478,4 +480,10 @@ request = (url, method, params, form, isFormData, type) => {
 };
 ```
 
-&emsp;&emsp;到这里就算是简单介绍完了,,想要更加深入了解的可以去 github 查看源代码，地址如下：[https://github.com/FleyX/teach_system，](https://github.com/FleyX/teach_system)记得 star 哦！
+## 结束
+
+目前这个系统已知存在如下问题：
+
+- 未控制代码判题速度，如果大量判题同时进行会导致判题核心崩溃.应该使用消息队列处理。
+
+本文原创发布于：[www.tapme.top/blog/detail/2018-10-01-13-58](https://www.tapme.top/blog/detail/2018-10-01-13-58)
