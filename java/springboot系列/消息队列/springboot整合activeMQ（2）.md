@@ -1,12 +1,16 @@
 ---
 id: "2018-09-06-10-38"
 date: "2018/09/06 10:38:00"
-title: "springboot整合ActiveMQ（2）"
+title: "springboot整合ActiveMQ2（主备模式）"
 tags: ["java", "spring","springboot","消息队列","activeMQ"]
 categories: 
 - "java"
 - "spring boot学习"
 ---
+
+
+- 基本使用,[https://www.tapme.top/blog/detail/2018-09-05-10-38](https://www.tapme.top/blog/detail/2018-09-05-10-38)
+- 主备模式,[https://www.tapme.top/blog/detail/2018-09-06-10-38](https://www.tapme.top/blog/detail/2018-09-06-10-38)
 
 &emsp;&emsp;单个 MQ 节点总是不可靠的，一旦该节点出现故障，MQ 服务就不可用了，势必会产生较大的损失。这里记录 activeMQ 如何开启主从备份，一旦 master（主节点故障），slave（从节点）立即提供服务，实现原理是运行多个 MQ 使用同一个持久化数据源，这里以 jdbc 数据源为例。同一时间只有一个节点（节点 A）能够抢到数据库的表锁，其他节点进入阻塞状态，一旦 A 发生错误崩溃，其他节点就会重新获取表锁，获取到锁的节点成为 master，其他节点为 slave，如果节点 A 重新启动，也将成为 slave。
 
@@ -161,3 +165,5 @@ brokerA 和 brokerB 都要设置该配置，以连上对方。
 ```
 
 证明负载均衡成功。
+
+本文原创发布于：[https://www.tapme.top/blog/detail/2018-09-06-10-38](https://www.tapme.top/blog/detail/2018-09-06-10-38)
