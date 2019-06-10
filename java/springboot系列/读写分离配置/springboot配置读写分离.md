@@ -2,15 +2,15 @@
 id: "2018-09-10-10-38"
 date: "2018/09/10 10:38:00"
 title: "springboot配置读写分离(Mybatis)"
-tags: ["java", "spring","springboot","mysql","主从备份","读写分离"]
-categories: 
-- "java"
-- "spring boot学习"
+tags: ["java", "spring", "springboot", "mysql", "主从备份", "读写分离"]
+categories:
+  - "java"
+  - "spring boot学习"
 ---
 
-&emsp;&emsp;近日工作任务较轻，有空学习学习技术，遂来研究如果实现读写分离。这里用博客记录下过程，一方面可备日后查看，同时也能分享给大家（网上的资料真的大都是抄来抄去，，还不带格式的，看的真心难受）。
+近日工作任务较轻，有空学习学习技术，遂来研究如果实现读写分离。这里用博客记录下过程，一方面可备日后查看，同时也能分享给大家（网上的资料真的大都是抄来抄去，，还不带格式的，看的真心难受）。
 
-[完整代码](https://github.com/FleyX/demo-project/tree/master/dxfl)
+完整代码：[https://github.com/FleyX/demo-project/tree/master/dxfl](https://github.com/FleyX/demo-project/tree/master/dxfl)
 
 ## 1、背景
 
@@ -312,7 +312,7 @@ public class ReadOnlyInterceptor implements Ordered {
 
 #### b、方法名式
 
-&emsp;&emsp;这种方法不许要注解，但是需要事务名称按一定规则编写，然后通过切面来设置数据库类别，比如`setXXX`设置为写、`getXXX`设置为读，代码我就不写了，应该都知道怎么写。
+&emsp;&emsp;这种方法不许要注解，但是需要service中方法名称按一定规则编写，然后通过切面来设置数据库类别，比如`setXXX`设置为写、`getXXX`设置为读，代码我就不写了，应该都知道怎么写。
 
 ## 4、测试
 
@@ -320,4 +320,6 @@ public class ReadOnlyInterceptor implements Ordered {
 
 ![测试结果](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/20190107102056.png)
 
-&emsp;&emsp;断断续续写了好几天终于是写完了，，，如果有帮助到你，，欢迎 star 哦，，这里是完整代码地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/dxfl)
+读写分离只是数据库扩展的一个临时解决办法，并不能一劳永逸，随着负载进一步增大，只有一个库用于写入肯定是不够的，而且单表的数据库是有上限的，mysql 最多千万级别的数据能保持较好的查询性能。最终还是会变成--**分库分表**架构的。分库分表可以看看这一篇：[https://www.tapme.top/blog/detail/2019-03-20-10-38](https://www.tapme.top/blog/detail/2019-03-20-10-38)
+
+**本文原创发布于：**[www.tapme.top/blog/detail/2018-09-10-10-38](www.tapme.top/blog/detail/2018-09-10-10-38)
