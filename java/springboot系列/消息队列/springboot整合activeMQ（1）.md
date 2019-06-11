@@ -1,14 +1,18 @@
 ---
 id: "2018-09-05-10-38"
 date: "2018/09/05 10:38:00"
-title: "springboot整合ActiveMQ（1）"
+title: "springboot整合ActiveMQ1（基本使用）"
 tags: ["java", "spring","springboot","消息队列","activeMQ"]
 categories: 
 - "java"
 - "spring boot学习"
 ---
 
-**说明：acitveMQ 版本为：5.9.1，springboot 版本为 2.0.3,项目地址：[点击跳转](https://github.com/FleyX/demo-project/tree/master/jms_demo)**<br/>
+- 基本使用,[https://www.tapme.top/blog/detail/2018-09-05-10-38](https://www.tapme.top/blog/detail/2018-09-05-10-38)
+- 主备模式,[https://www.tapme.top/blog/detail/2018-09-06-10-38](https://www.tapme.top/blog/detail/2018-09-06-10-38)
+
+**说明**：acitveMQ 版本为：5.9.1，springboot 版本为 2.0.3
+
 
 ## 一. 下载安装（windows）
 
@@ -141,3 +145,7 @@ public class Comsumer {
 ![运行结果](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/20190107101808.png)
 
 每个消息队列有两个消费者，队列进入了三个消息，出了三个消息，说明消息都被消费掉了，如果注释掉消费者代码，再次运行，然后发送消息就会发现 MessagesEnqueued 数量大于 MessagesDequeued，然后再让消费者上线会立即消费掉队列中的消息。
+
+**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-09-05-10-38](https://www.tapme.top/blog/detail/2018-09-05-10-38)
+
+源码：[https://github.com/FleyX/demo-project/tree/master/jms_demo](https://github.com/FleyX/demo-project/tree/master/jms_demo)
