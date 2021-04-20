@@ -22,6 +22,8 @@ categories:
 3. 如数字和>=k说明能否满足，i=i+1,s=s+1,重复第一步
 4. 直到所有的数字都填入
 
+<!-- more -->
+
 java代码见：[点击这里](https://github.com/FleyX/demo-project/blob/master/5.leetcode/src/com/fanxb/interview/Q1663.java),translateNum1方法
 
 进一步思考会发现上面的解法存在存在很多的循环，效率不高，能否优化？
