@@ -224,4 +224,4 @@ MessageEvent {isTrusted: true, data: "这是一条测试广播", origin: "ws://
 
 &emsp;&emsp;源码可在 [github 下载](https://github.com/FleyX/demo-project/tree/master/h5websocket) 上下载，记得点赞，star 哦
 
-**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-08-25-10-38](https://www.tapme.top/blog/detail/2018-08-25-10-38)
+**本文原创发布于：**[https://blog.fleyx.com/blog/detail/2018-08-25-10-38](https://blog.fleyx.com/blog/detail/2018-08-25-10-38)

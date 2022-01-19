@@ -8,8 +8,8 @@ categories:
 - "spring boot学习"
 ---
 
-- 基本使用,[https://www.tapme.top/blog/detail/2018-09-05-10-38](https://www.tapme.top/blog/detail/2018-09-05-10-38)
-- 主备模式,[https://www.tapme.top/blog/detail/2018-09-06-10-38](https://www.tapme.top/blog/detail/2018-09-06-10-38)
+- 基本使用,[https://blog.fleyx.com/blog/detail/2018-09-05-10-38](https://blog.fleyx.com/blog/detail/2018-09-05-10-38)
+- 主备模式,[https://blog.fleyx.com/blog/detail/2018-09-06-10-38](https://blog.fleyx.com/blog/detail/2018-09-06-10-38)
 
 **说明**：acitveMQ 版本为：5.9.1，springboot 版本为 2.0.3
 
@@ -146,6 +146,6 @@ public class Comsumer {
 
 每个消息队列有两个消费者，队列进入了三个消息，出了三个消息，说明消息都被消费掉了，如果注释掉消费者代码，再次运行，然后发送消息就会发现 MessagesEnqueued 数量大于 MessagesDequeued，然后再让消费者上线会立即消费掉队列中的消息。
 
-**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-09-05-10-38](https://www.tapme.top/blog/detail/2018-09-05-10-38)
+**本文原创发布于：**[https://blog.fleyx.com/blog/detail/2018-09-05-10-38](https://blog.fleyx.com/blog/detail/2018-09-05-10-38)
 
 源码：[https://github.com/FleyX/demo-project/tree/master/jms_demo](https://github.com/FleyX/demo-project/tree/master/jms_demo)

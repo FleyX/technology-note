@@ -12,9 +12,9 @@ categories:
 
 **系列**
 
-- [springboot+security 整合（1）](https://www.tapme.top/blog/detail/2018-08-20-10-37)
-- [springboot+security 整合（2）](https://www.tapme.top/blog/detail/2018-08-21-10-38)
-- [springboot+security 整合（3）](https://www.tapme.top/blog/detail/2018-08-22-10-38)
+- [springboot+security 整合（1）](https://blog.fleyx.com/blog/detail/2018-08-20-10-37)
+- [springboot+security 整合（2）](https://blog.fleyx.com/blog/detail/2018-08-21-10-38)
+- [springboot+security 整合（3）](https://blog.fleyx.com/blog/detail/2018-08-22-10-38)
 
 ## 一、 介绍
 
@@ -295,4 +295,4 @@ dataSource 为@Autowired 引入
 
 在登录表单中设置 remember-me 即可实现记住我功能。
 
-**本文原创发布于：**[https://www.tapme.top/blog/detail/2018-08-20-10-38](https://www.tapme.top/blog/detail/2018-08-20-10-37)
+**本文原创发布于：**[https://blog.fleyx.com/blog/detail/2018-08-20-10-38](https://blog.fleyx.com/blog/detail/2018-08-20-10-37)

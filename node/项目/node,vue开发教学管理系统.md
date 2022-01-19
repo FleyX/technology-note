@@ -16,7 +16,7 @@ categories:
 
 代码已开源：[https://github.com/FleyX/teach_system](https://github.com/FleyX/teach_system)
 
-demo 地址：[ali.tapme.top:8008](http://ali.tapme.top:8008) 123456/123456
+~~demo 地址：[ali.tapme.top:8008](http://ali.tapme.top:8008) 123456/123456~~(已失效)
 
 ## 1、需求分析
 
@@ -484,4 +484,4 @@ request = (url, method, params, form, isFormData, type) => {
 
 - 未控制代码判题速度，如果大量判题同时进行会导致判题核心崩溃.应该使用消息队列处理。
 
-本文原创发布于：[www.tapme.top/blog/detail/2018-10-01-13-58](https://www.tapme.top/blog/detail/2018-10-01-13-58)
+本文原创发布于：[blog.fleyx.com/blog/detail/2018-10-01-13-58](https://blog.fleyx.com/blog/detail/2018-10-01-13-58)

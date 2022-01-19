@@ -31,7 +31,7 @@ categories:
 
 推荐使用 docker 来搭建环境，非常方便。
 
-1. 首先安装 docker 环境，参考这篇:[docker 安装](https://www.tapme.top/blog/detail/1.linux下mongodb的配置与安装)
+1. 首先安装 docker 环境，参考这篇:[docker 安装](https://blog.fleyx.com/blog/detail/1.linux下mongodb的配置与安装)
 
 2. 安装 docker-compose
 
@@ -57,8 +57,8 @@ services:
 
 docker-compose.yml 文件所在目录执行`docker-compose up -d`。便能够通过访问 ip+端口,进入 web 端界面。在设置界面可以调成中文。默认进入是英文。
 
-提供一个测试账号：ali.tapme.top:8007 test/testgggg
+~~提供一个测试账号：ali.tapme.top:8007 test/testgggg~~(已失效)
 
 请勿恶意大量上传下载哦！
 
-**本文原创发布于：**[https://www.tapme.top/blog/detail/20190516](https://www.tapme.top/blog/detail/20190516)
+**本文原创发布于：**[https://blog.fleyx.com/blog/detail/20190516](https://blog.fleyx.com/blog/detail/20190516)

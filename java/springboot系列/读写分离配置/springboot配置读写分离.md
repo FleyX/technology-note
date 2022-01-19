@@ -320,6 +320,6 @@ public class ReadOnlyInterceptor implements Ordered {
 
 ![测试结果](https://raw.githubusercontent.com/FleyX/files/master/blogImg/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB/20190107102056.png)
 
-读写分离只是数据库扩展的一个临时解决办法，并不能一劳永逸，随着负载进一步增大，只有一个库用于写入肯定是不够的，而且单表的数据库是有上限的，mysql 最多千万级别的数据能保持较好的查询性能。最终还是会变成--**分库分表**架构的。分库分表可以看看这一篇：[https://www.tapme.top/blog/detail/2019-03-20-10-38](https://www.tapme.top/blog/detail/2019-03-20-10-38)
+读写分离只是数据库扩展的一个临时解决办法，并不能一劳永逸，随着负载进一步增大，只有一个库用于写入肯定是不够的，而且单表的数据库是有上限的，mysql 最多千万级别的数据能保持较好的查询性能。最终还是会变成--**分库分表**架构的。分库分表可以看看这一篇：[https://blog.fleyx.com/blog/detail/2019-03-20-10-38](https://blog.fleyx.com/blog/detail/2019-03-20-10-38)
 
-**本文原创发布于：**[www.tapme.top/blog/detail/2018-09-10-10-38](www.tapme.top/blog/detail/2018-09-10-10-38)
+**本文原创发布于：**[blog.fleyx.com/blog/detail/2018-09-10-10-38](blog.fleyx.com/blog/detail/2018-09-10-10-38)

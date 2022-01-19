@@ -12,9 +12,9 @@ categories:
 
 **系列**
 
-- [springboot+security 整合（1）](https://www.tapme.top/blog/detail/2018-08-20-10-37)
-- [springboot+security 整合（2）](https://www.tapme.top/blog/detail/2018-08-21-10-38)
-- [springboot+security 整合（3）](https://www.tapme.top/blog/detail/2018-08-22-10-38)
+- [springboot+security 整合（1）](https://blog.fleyx.com/blog/detail/2018-08-20-10-37)
+- [springboot+security 整合（2）](https://blog.fleyx.com/blog/detail/2018-08-21-10-38)
+- [springboot+security 整合（3）](https://blog.fleyx.com/blog/detail/2018-08-22-10-38)
 
 &emsp;&emsp;这篇讲解如何自定义鉴权过程，实现根据数据库查询出的 url 和 method 是否匹配当前请求的 url 和 method 来决定有没有权限。security 鉴权过程如下：
 
@@ -246,4 +246,4 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 
 完成
 
-**本篇原创发布于：**[https://www.tapme.top/blog/detail/2018-08-22-10-38](https://www.tapme.top/blog/detail/2018-08-22-10-38)
+**本篇原创发布于：**[https://blog.fleyx.com/blog/detail/2018-08-22-10-38](https://blog.fleyx.com/blog/detail/2018-08-22-10-38)

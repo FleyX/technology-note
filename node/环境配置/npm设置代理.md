@@ -57,4 +57,3 @@ npm config delete proxy
 npm config delete https-proxy
 ```
 
-本文原创发布于[tapme.top/blog/detail/20191010](https://www.tapme.top/blog/detail/20191010)
