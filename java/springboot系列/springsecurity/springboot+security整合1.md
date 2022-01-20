@@ -295,4 +295,3 @@ dataSource 为@Autowired 引入
 
 在登录表单中设置 remember-me 即可实现记住我功能。
 
-**本文原创发布于：**[https://blog.fleyx.com/blog/detail/2018-08-20-10-38](https://blog.fleyx.com/blog/detail/2018-08-20-10-37)

@@ -229,4 +229,3 @@ sharding:
 
 &emsp;&emsp;运行`com.fanxb.sjdemo.MainTest`查看测试结果。
 
-**本文原创发布于：**[https://blog.fleyx.com/blog/detail/2019-03-20-10-38](https://blog.fleyx.com/blog/detail/2019-03-20-10-38)

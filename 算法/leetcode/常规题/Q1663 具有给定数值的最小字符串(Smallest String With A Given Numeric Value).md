@@ -42,5 +42,3 @@ java代码见：[点击这里](https://github.com/FleyX/demo-project/blob/master
 另外本体可换一种描述，要求数字序列拼成的数字最小，比如['12','32']拼成1232,也是一样的解法。
 ***
 
-
-本文原创发布于：[blog.fleyx.com/blog/detail/20210326](https://blog.fleyx.com/blog/detail/20210326)

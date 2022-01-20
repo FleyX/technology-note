@@ -61,4 +61,3 @@ docker-compose.yml 文件所在目录执行`docker-compose up -d`。便能够通
 
 请勿恶意大量上传下载哦！
 
-**本文原创发布于：**[https://blog.fleyx.com/blog/detail/20190516](https://blog.fleyx.com/blog/detail/20190516)

@@ -42,5 +42,3 @@ servers=::1,127.0.0.1,8.8.8.8
 
 大功告成～
 
-
-**本文原创发布于：**[blog.fleyx.com/blog/detail/20210927](https://blog.fleyx.com/blog/detail/20211019)

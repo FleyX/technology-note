@@ -484,4 +484,3 @@ request = (url, method, params, form, isFormData, type) => {
 
 - 未控制代码判题速度，如果大量判题同时进行会导致判题核心崩溃.应该使用消息队列处理。
 
-本文原创发布于：[blog.fleyx.com/blog/detail/2018-10-01-13-58](https://blog.fleyx.com/blog/detail/2018-10-01-13-58)

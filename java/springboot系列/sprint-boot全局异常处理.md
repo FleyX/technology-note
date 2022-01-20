@@ -198,4 +198,3 @@ public class ExceptionHandle {
 **本文所用到代码见：[github](https://github.com/FleyX/demo-project/tree/master/spring-boot/exceptionTest)**
 
 
-**本文原创发布于：**[blog.fleyx.com/blog/detail/20210927](https://blog.fleyx.com/blog/detail/20210927)
