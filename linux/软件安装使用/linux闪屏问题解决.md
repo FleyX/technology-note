@@ -2,7 +2,7 @@
 id: "20210625"
 date: "2019/06/25 10:38:05"
 title: "linux闪屏问题解决"
-tags: ["linux", "arch", "manjaro",“闪屏”]
+tags: ["linux", "arch", "manjaro","闪屏"]
 categories:
   - "linux"
   - "软件安装"
