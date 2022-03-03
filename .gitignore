@@ -3,3 +3,7 @@
 **.html
 .vscode 
 xxx
+/.idea/.gitignore
+/.idea/modules.xml
+/.idea/technology-note.iml
+/.idea/vcs.xml
