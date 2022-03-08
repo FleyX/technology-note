@@ -3,7 +3,7 @@ id: "20220121"
 date: "2022/01/21 10:38:05"
 title: "免费ssl证书看这篇就够了(单域名/dnspod泛域名申请/自动续期)"
 tags: ["linux", "nginx", "ssl", "certbot", "泛域名", "dnspod"]
-index_img: https://qiniupic.fleyx.com/blog/202201241640756.png
+index_img: https://qiniupic.fleyx.com/blog/202201241641133.jpg?imageView2/2/w/200
 banner_img: https://qiniupic.fleyx.com/blog/202201241641133.jpg
 categories:
   - "linux"
