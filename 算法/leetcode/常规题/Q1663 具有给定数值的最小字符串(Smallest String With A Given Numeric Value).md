@@ -8,7 +8,6 @@ categories:
   - "leetcode刷题"
 ---
 
-<span id="blogIdSpan" style="display:none">20210326</span>
 
 ### 解析思路
 
@@ -49,3 +48,7 @@ java 代码见：[点击这里](https://github.com/FleyX/demo-project/blob/maste
 另外本体可换一种描述，要求数字序列拼成的数字最小，比如['12','32']拼成 1232,也是一样的解法。
 
 ---
+
+
+<span id="blogIdSpan" style="display:none">20210326</span>
+
