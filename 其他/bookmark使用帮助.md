@@ -119,7 +119,7 @@ enter/回车: 未选中书签情况下，用于发起网页搜索。选中书签
 
 #### 安装插件
 
-1. 首先下载插件压缩包，下载地址：[点击下载](https://fleyx.com/static/bookmarkBrowserPlugin.7z)
+1. 首先下载插件压缩包，下载地址：[点击下载](https://fleyx.com/static/bookmarkBrowserPlugin.zip)
 
 2. 安装插件（以 chrome 浏览器为例，其他支持插件的浏览器差不多）进入插件管理页面->开启开发者模式->加载已解压的拓展程序
 
