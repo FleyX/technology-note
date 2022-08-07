@@ -36,7 +36,9 @@ categories:
 1. 安装`snapd`
 
 ```bash
-sudo snap install core; sudo snap refresh core
+sudo apt install snapd
+sudo snap install core
+sudo snap refresh core
 ```
 
 2. 安装`certbot`
