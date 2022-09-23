@@ -1,0 +1,17 @@
+kind: pipeline
+type: docker
+name: blogPublish
+
+steps:
+  - name: package
+    image: node:16-bullseye
+    volumes:
+      - name: app
+        path: /app
+    commands:
+      - cd /app
+      - npm install -g hexo --registry=https://registry.npmmirror.com
+      - npm install --registry=https://registry.npmmirror.com
+      - hexo v && hexo clean && hexo g
+      - cd  public
+      - tar -czf  ../dist.tar.gz  *
