@@ -13,7 +13,8 @@ steps:
         from_secret: privateSsh
     commands:
       - echo $privateKey
-      - echo $privateKey>sshKey
+      - echo $privateKey > sshKey
+      - cat sshKey
       - ssh-add sshKey
       - cd /app/BlogGenerate
       - ls -l
