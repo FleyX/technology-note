@@ -8,18 +8,17 @@ clone:
 steps:
   - name: pull
     image: bitnami/git
-#    volumes:
-#      - name: app
-#        path: /app
-#      - name: ssh
-#        path: ~/.ssh
+    volumes:
+      - name: app
+        path: /app
+      - name: ssh
+        path: ~/.ssh
     commands:
-      - pwd
-      - ls -l ./
-#      - cd /app/blogPublish
-#      - git pull
-#      - cd /app/blogPublish/source/_posts/technology-note
-#      - git pull
+      - cd /app/BlogGenerate
+      - git pull
+      - cd /app/blogPublish/source/_posts/technology-note
+      - git pull
+      - ls
 #  - name: package
 #    image: node:16-bullseye
 #    volumes:
@@ -43,3 +42,10 @@ steps:
 #      script:
 #        - cd ~/packages
 #        - md5sum -c app.jar.md5
+volumes: # 定义流水线挂载目录，用于共享数据
+  - name: app
+    host:
+      path: /dataPool/systemData/linux_env/data/drone/workspace/blogPublish
+  - name: ssh
+    host:
+      path: /dataPool/systemData/linux_env/data/drone/ssh
