@@ -16,7 +16,7 @@ steps:
       - eval $(ssh-agent)
       - ssh-add id_rsa
       - cd ../
-      - mkdir ~/.ssh && ssh ssh-keyscan -p 222 -t rsa gitea.fleyx.com >> ~/.ssh/known_hosts
+      - mkdir ~/.ssh && ssh-keyscan -p 222 -t rsa gitea.fleyx.com >> ~/.ssh/known_hosts
       - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/BlogGenerate.git
       - cd BlogGenerate/source/_posts
       - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/technology-note.git
