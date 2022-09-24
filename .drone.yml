@@ -14,6 +14,7 @@ steps:
       - name: ssh
         path: /app/ssh
     commands:
+      - ls -l /app
       - ls -l /app/ssh
       - ssh-add /app/ssh/id_rsa
       - cd /app/BlogGenerate
