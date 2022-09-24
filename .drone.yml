@@ -14,8 +14,10 @@ steps:
       - name: ssh
         path: /app/ssh
     commands:
+      - ls -l /app/ssh
       - ssh-add /app/ssh/id_rsa
       - cd /app/BlogGenerate
+      - ls -l
       - git pull
       - cd /app/blogPublish/source/_posts/technology-note
       - git pull
