@@ -14,9 +14,10 @@ steps:
     commands:
       - echo $privateKey
       - echo $privateKey > sshKey
-      - sleep 40
+      - eval $(ssh-agent)
       - cat sshKey
       - ssh-add sshKey
+      - sleep 100
       - cd /app/BlogGenerate
       - ls -l
       - git pull
