@@ -19,12 +19,8 @@ steps:
       - chmod 600 sshKey
       - ssh-add sshKey
       - sleep 100
-      - cd /app/BlogGenerate
+      - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/BlogGenerate.git
       - ls -l
-      - git pull
-      - cd /app/blogPublish/source/_posts/technology-note
-      - git pull
-      - ls
 #  - name: package
 #    image: node:16-bullseye
 #    volumes:
