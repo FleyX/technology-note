@@ -8,15 +8,13 @@ clone:
 steps:
   - name: pull
     image: bitnami/git
-    volumes:
-      - name: app
-        path: /app
-      - name: ssh
-        path: /app/ssh
+    settings:
+      privateKey:
+        from_secret: privateSsh
     commands:
-      - ls -l /app
-      - ls -l /app/ssh
-      - ssh-add /app/ssh/id_rsa
+      - echo $privateKey
+      - echo $privateKey>sshKey
+      - ssh-add sshKey
       - cd /app/BlogGenerate
       - ls -l
       - git pull
@@ -46,10 +44,3 @@ steps:
 #      script:
 #        - cd ~/packages
 #        - md5sum -c app.jar.md5
-volumes: # 定义流水线挂载目录，用于共享数据
-  - name: app
-    host:
-      path: /dataPool/systemData/linux_env/data/drone/workspace/blogPublish
-  - name: ssh
-    host:
-      path: /dataPool/systemData/linux_env/data/drone/ssh
