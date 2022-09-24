@@ -8,21 +8,25 @@ clone:
 steps:
   - name: pull
     image: bitnami/git
+    volumes:
+       - name: ssh
+         path: /app/.ssh
+    commands:
+      - cd /app/.ssh
+      - eval $(ssh-agent)
+      - ssh-add id_rsa
+      - cd ../
+      - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/BlogGenerate.git
+      - cd BlogGenerate/source/_posts
+      - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/technology-note.git
+      - sleep 100
+      - ls -l
+    #  - name: package
+    #    image: node:16-bullseye
+
     environment:
       privateKey:
         from_secret: privateSsh
-    commands:
-      - echo $privateKey
-      - echo $privateKey > sshKey
-      - eval $(ssh-agent)
-      - cat sshKey
-      - chmod 600 sshKey
-      - ssh-add sshKey
-      - sleep 100
-      - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/BlogGenerate.git
-      - ls -l
-#  - name: package
-#    image: node:16-bullseye
 #    volumes:
 #      - name: app
 #        path: /app
@@ -44,3 +48,10 @@ steps:
 #      script:
 #        - cd ~/packages
 #        - md5sum -c app.jar.md5
+volumes:
+  - name: ssh
+    host:
+      path: /root/.ssh
+  - name: npmRep
+    host:
+      path: /root/npmRep
