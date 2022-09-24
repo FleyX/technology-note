@@ -16,6 +16,7 @@ steps:
       - echo $privateKey > sshKey
       - eval $(ssh-agent)
       - cat sshKey
+      - chmod 600 sshKey
       - ssh-add sshKey
       - sleep 100
       - cd /app/BlogGenerate
