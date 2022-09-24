@@ -2,16 +2,44 @@ kind: pipeline
 type: docker
 name: blogPublish
 
+clone:
+  depth: 1
+
 steps:
-  - name: package
-    image: node:16-bullseye
-    volumes:
-      - name: app
-        path: /app
+  - name: pull
+    image: bitnami/git
+#    volumes:
+#      - name: app
+#        path: /app
+#      - name: ssh
+#        path: ~/.ssh
     commands:
-      - cd /app
-      - npm install -g hexo --registry=https://registry.npmmirror.com
-      - npm install --registry=https://registry.npmmirror.com
-      - hexo v && hexo clean && hexo g
-      - cd  public
-      - tar -czf  ../dist.tar.gz  *
+      - pwd
+      - ls -l ./
+#      - cd /app/blogPublish
+#      - git pull
+#      - cd /app/blogPublish/source/_posts/technology-note
+#      - git pull
+#  - name: package
+#    image: node:16-bullseye
+#    volumes:
+#      - name: app
+#        path: /app
+#    commands:
+#      - cd /app
+#      - npm install -g hexo --registry=https://registry.npmmirror.com
+#      - npm install --registry=https://registry.npmmirror.com
+#      - hexo v && hexo clean && hexo g
+#      - cd  public
+#      - tar -czf  ../dist.tar.gz  *
+#      - cd  public
+#  - name: deploy
+#    image: drillster/drone-rsync
+#    settings:
+#      hosts: [ "fleyx.com:22000" ]
+#      source: ./target
+#      target: ~/packages
+#      include: [ "app.jar", "app.jar.md5" ]
+#      script:
+#        - cd ~/packages
+#        - md5sum -c app.jar.md5
