@@ -17,6 +17,7 @@ steps:
       - ssh-add id_rsa
       - cd ../
       - mkdir ~/.ssh && ssh-keyscan -p 222 -t rsa gitea.fleyx.com >> ~/.ssh/known_hosts
+      - sleep 2001
       - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/BlogGenerate.git
       - cd BlogGenerate/source/_posts
       - git clone --depth 1 ssh://git@gitea.fleyx.com:222/fanxb/technology-note.git
